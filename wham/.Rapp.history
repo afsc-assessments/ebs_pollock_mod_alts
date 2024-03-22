@@ -1,0 +1,2 @@
+load("/Users/jim/_mymods/ebswp/model_alts/wham/t1.rds")
+ls()
