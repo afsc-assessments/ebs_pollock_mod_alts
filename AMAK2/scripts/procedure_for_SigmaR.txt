@@ -1,0 +1,11 @@
+Based on Grant's work steps are to:
+1) run model with sigmaR freely estimated
+2) run with sigmaR fixed at value from 1)
+3) using "output" sigmaR from 2), 
+To calculate ?ymarg, do the following:
+Set ?yest provisionally at a very high value, so that the resulting estimate of ytru is theoretically equal to yobs
+Given yobs, calculate ?yfull by iteration (requires ?>0.75)
+Given yobs and ?yfull, ?? 2 can be calculated as
+sig=sigfull(var(
+
+Finally, calculate ?ymarg from yobs and ??
