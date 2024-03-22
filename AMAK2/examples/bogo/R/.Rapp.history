@@ -1,0 +1,304 @@
+compareTime(lstOuts,"R",legendPos="left",SD=F)
+compareTime(lstOuts,"R",SD=T,legendPos="topright")
+compareTime(lstOuts,"R",SD=T,legendPos="topright",styr=1990)
+compareTime(lstOuts,"R",SD=T,legendPos="topright",startYear=1990)
+rec_age=4
+p.rec.hist(mod1,main="Model 1",ylab="Recruitment",fy=1977,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1977,ly=2014,plotmean="T")
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1", ,ylab="Survey biomass (t)")
+p.catch.fit(mod1,f=1,ylim=c(0,110000))
+p.catch.fit(mod1,f=1,ylim=c(0,1100000))
+p.catch.fit(mod1,f=1,ylim=c(0,500000))
+p.catch.fit(mod1,f=1,ylim=c(0,50000))
+plot(mod1$SSB,typ="b",ylab="SSB",xlab="Year",ylim=c(0,.85e6))
+p.catch.fit(mod1.1,f=1,ylim=c(0,50000))
+p.catch.fit(mod1.1,f=1,ylim=c(0,100000))
+p.catch.fit(mod1.1,f=1,ylim=c(0,150000))
+p.catch.fit(mod1.1,f=1,ylim=c(0,250000))
+p.catch.fit(mod1.1,f=1,ylim=c(0,500000))
+p.catch.fit(mod1.1,f=1,ylim=c(0,400000))
+rec_age=4
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1977,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1987,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1980,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1982,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+AgeFits(mod1,rec_age=1,case_label="2014 1 assessment")
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1 assessment")
+mod1.1 <- readList(file.path(inputPath,paste("For_R.rep",sep="")))
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1 assessment")
+mod1.1 <- readList(file.path(inputPath,paste("For_R.rep",sep="")))
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1 assessment")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1977,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1", ,ylab="Survey biomass (t)")
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1", ,ylab="Survey biomass (t)")
+detach(dat)
+detach(dat)
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1", ,ylab="Survey biomass (t)")
+mod1.0 <- readList(file.path(inputPath,paste("arc/mod1.0_R.rep",sep="")))
+mod1.1 <- readList(file.path(inputPath,paste("arc/mod1.1_R.rep",sep="")))
+mod1.2 <- readList(file.path(inputPath,paste("arc/mod1.2_R.rep",sep="")))
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1.1 assessment")
+AgeFitsSrv(mod1.2,rec_age=4,case_label="2014 1.2 assessment")
+AgeFitsSrv(mod1.0,rec_age=4,case_label="2014 1.0 assessment")
+exp(-124)
+exp(.124)
+mod1.0 <- readList(file.path(inputPath,paste("arc/mod1.0_R.rep",sep="")))
+mod1.1 <- readList(file.path(inputPath,paste("arc/mod1.1_R.rep",sep="")))
+mod1.2 <- readList(file.path(inputPath,paste("arc/mod1.2_R.rep",sep="")))
+lstOuts   <- list( Model_1= mod1.0, Model_1.1= mod1.1, Model_1.2= mod1.2)
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,legendPos="topleft",startYear=1977,ylim=c(0,1000000),main="Spawning biomass")
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,legendPos="topleft",startYear=1977,ylim=c(0,2000000),main="Spawning biomass")
+lstOuts   <- list( Model_1.0= mod1.0, Model_1.1= mod1.1 )
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,legendPos="topleft",startYear=1977,ylim=c(0,2000000),main="Spawning biomass")
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,legendPos="topleft",startYear=1977,ylim=c(0,2000000),main="Spawning biomass",legendPos="topright")
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,legendPos="topleft",startYear=1977,ylim=c(0,2000000),main="Spawning biomass",legendPos="topright")
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,startYear=1977,ylim=c(0,2000000),main="Spawning biomass",legendPos="topright")
+AgeFitsSrv(mod1.0,rec_age=4,case_label="2014 1.0 assessment")
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1.1 assessment")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1977,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1982,ly=2014,plotmean="T")
+source("/Users/jim/_mymods/AMAK/examples/bogo/R/Bog2014.r")
+p.rec.hist(mod1.1,main="Model 1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.0,main="Model 1.0",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T",ylim=c(0,1.5e6))
+p.rec.hist(mod1.0,main="Model 1.0",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T",ylim=c(0,1.5e6))
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.0,main="Model 1.0",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.0,main="Model 1.0",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.0,main="Model 1.0",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1", ,ylab="Survey biomass (t)")
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)")
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1.1", ,ylab="Survey biomass (t)")
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)")
+names(mod1.1)
+(mod1.1$Obs_Surv_1)
+(mod1.1$Obs_Survey_1)
+lines(mod1.1$Obs_Survey_1[,c(1,3)])
+source("IndexFit.r")
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)")
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,1e5))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,7e5))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,1e6))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2e6))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.5e6))
+IndexFit<-function(dat,f=1,main="Model 1",ylab="", yf=1970,yl=2014 ,Doleg=F,ylim=c(0,1))#
+{#
+  attach(dat)#
+  require(plotrix)#
+  x<-paste("Obs_Survey_",f,sep="")#
+  Data<-get(x)#
+  d1<-subset(Data,Data[,2]>0)#
+#  windows(8,8)#
+  plotCI( d1[,1], d1[,2], 2*d1[,4],#
+  new=F,#
+  main=main,#
+          #Index_names[f],#
+  cex.main=2,#
+  cex.lab=1.5,#
+  ylim=ylim, #c(0,(max(d1[,2])*1.9)),#
+  xlim=c(yf,yl),pch=19,cex=1,#
+  ylab=ylab,#
+  xlab="Year",col="blue",scol="black",lab=c(10,10,7)#
+)#
+#
+  points(Data[,3]~Data[,1],type="l",col="red",lwd=2)#
+  points(Data[Data[,2]>0,1],Data[Data[,2]>0,2],type="p",pch=19,col="blue",cex=1)#
+#
+  if (Doleg){#
+    text(min(Data[,1])+2,(max(d1[,2])*0.5),"Observed estimate",pos=4,cex=0.8)#
+    text(min(Data[,1])+2,(max(d1[,2])*0.4),"Model Fit",pos=4,cex=0.8)#
+    points(min(Data[,1])+2,(max(d1[,2])*0.5),pch=19,col="blue",cex=0.8)#
+    text(min(Data[,1])+2,(max(d1[,2])*0.4),"--",cex=1.5,col="red")#
+  }#
+  detach(dat)#
+}#
+#
+Indices<-function(dat=mod1c,Title="Model 1c"){#
+  # Index fits#
+  # windows(,11, 6.5)#
+  par(mfrow=c(2,4), oma=c(0,1,3,1) )#
+  for(i in 1:length(dat$Index_names))#
+  {#
+    if (i==1) #
+      Doleg=T#
+    else #
+      Doleg=F#
+   IndexFit(dat,f=i,Doleg=Doleg)#
+  }#
+  # text(2000,  20, Title , cex=3, col="black",family="sans serif",font=1)#
+  mtext(Title,3,-0,outer=T, cex=2, col="blue",family="sans",font=2)#
+}#
+#
+CatchFit<-function(dat=am1,Title="Model 1"){#
+ par(mfrow=c(2,2), oma=c(0,1,3,1) )#
+ for (i in 1:4){#
+   p.catch.fit(dat,f=i)#
+ }#
+ mtext(Title,3,-0,outer=T, cex=2, col="blue",family="sans",font=2)#
+ }
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.5e6))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.8e6))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.7e6))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1.1", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+source("IndexFit.r")
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+IndexFit(mod1.1,yf=1985,yl=2014,f=1,main="Model 1.1", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+lines(mod1.1$Obs_Survey_1[,c(1,3)],lty=2)
+Mest = read.table("Mmcmc.rep")
+Mest = read.table("../Mmcmc.rep")
+plot(density(Mest))
+?density
+density(Mest)
+Mest
+is.vector(Mest)
+Mest=as.vector(Mest)
+is.vector(Mest)
+Mest=as.vector(Mest[,1])
+is.vector(Mest)
+density(Mest)
+plot(density(Mest))
+plot(density(Mest),xlab="Natural mortality rate",main="")
+abline(h=0)
+plot(density(Mest),xlab="Natural mortality rate",main="")
+abline(h=0)
+plot(density(Mest),xlab="Natural mortality rate",main="Model 1.1")
+abline(h=0)
+plot(density(Mest),xlab="Natural mortality rate",main="Model 1.1")
+abline(h=0,wid=.2)
+rec_age=4
+p.rec.hist(mod1.0,main="Model 1.0",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,legendPos="topright",startYear=1977,ylim=c(0,500000))
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,startYear=1977,ylim=c(0,2000000),main="Spawning biomass",legendPos="topright")
+AgeFitsSrv(mod1.0,rec_age=4,case_label="2014 1.0 assessment")
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1.1 assessment")
+?plognorm
+?dnorm
+?dlnorm
+plot(density(rlnorm(5000,meanlog=0.2,sdlog=4.)))
+(mean(rlnorm(5000,meanlog=0.2,sdlog=4.)))
+(mean(rlnorm(5000,ln(0.2),4.)))
+(mean(rlnorm(5000,log(0.2),4.)))
+rlnorm(100,.2,.2)
+rlnorm(100)
+log(rlnorm(100))
+stdev(Mest)
+std(Mest)
+sqrt(var(Mest))
+median(Mest)
+summary(Mest)
+setwd("/Users/jim/_mymods/RandWalk/")
+source("rcode/read.admb.r")
+source("rcode/poly.r")
+require(PBSmodelling)
+require(hacks)
+d=read.dat("rw.dat")
+d=read.dat("rwout.rep")
+/read
+plot_1spp(root="AI_Kamchatka")
+ls()
+plot_1spp("bog",main="",doleg=F)
+plot_1spp("bog",main="",doleg=F)
+plot_spp("bog")
+fix(bog)
+fix(plot_spp)
+fix(plot_1spp)
+plot_1spp("bog",main="",doleg=F)
+plot_1spp("bog",main="",doleg=F)
+plot_1spp("bog",main="",doleg=F)
+plot_1spp("bog",main="",doleg=F,ylim=c(0,.8e6))
+setwd("/Users/jim/_mymods/RandWalk/")
+source("rcode/read.admb.r")
+source("rcode/poly.r")
+plot_1spp("bog",main="",doleg=F,ylim=c(0,.8e6))
+source("rcode/poly.r")
+source("rcode/read.admb.r")
+plot_1spp("bog",main="",doleg=F,ylim=c(0,.8e6))
+setwd("/Users/jim/_mymods/RandWalk/")
+source("rcode/read.admb.r")
+source("rcode/poly.r")
+plot_1spp
+plot_1spp("bog",main="",doleg=F,ylim=c(0,.8e6))
+plot_1spp("bog",main="",doleg=F)
+setwd("/Users/jim/_mymods/RandWalk/")
+source("rcode/read.admb.r")
+source("rcode/poly.r")
+plot_1spp("bog",main="",doleg=F)
+abline(h=0)
+ls()
+detach(est)
+detach(est)
+detach(est)
+detach(est)
+detach(est)
+detach(est)
+detach(est)
+plot_1spp("bog",main="",doleg=F)
+warnings()
+source("rcode/poly.r")
+detach(est)
+plot_1spp("bog",main="",doleg=F)
+source("rcode/poly.r")
+detach(est)
+plot_1spp("bog",main="",doleg=F)
+source("rcode/poly.r")
+detach(est)
+plot_1spp("bog",main="",doleg=F)
+source("rcode/poly.r")
+plot_1spp("bog",main="",doleg=F)
+source("rcode/poly.r")
+plot_1spp("bog",main="",doleg=F)
+plot_1spp("bog",main="",doleg=T)
+source("rcode/poly.r")
+detach(est)
+plot_1spp("bog",main="",doleg=T)
+require(PBSadmb)
+library(lattice)
+library(RColorBrewer)
+library(doBy)
+reposDir    <- "/Users/jim/_mymods/amak/examples/bogo/"
+codePath    <- file.path(reposDir,"R")
+inputPath   <- reposDir
+outputPath  <- file.path(reposDir,"arc/")
+resultPath  <- file.path(reposDir,"results/")
+fndir<-"/users/jim/Dropbox/R_common/"
+outdir="/Users/jim/_mymods/AMAK/examples/bogo/"
+Figdir="/Users/jim/_mymods/AMAK/examples/bogo/figs"
+ret_dir="/Users/jim/_mymods/AMAK/examples/bogo/retro"
+setwd(codePath)
+source(paste(fndir,"adfunctions.r",sep=""))
+source("ADMB2R_15102013.r")
+source("compareRuns.r")
+mod1.1 <- readList(file.path(inputPath,paste("For_R.rep",sep="")))
+mod1.0 <- readList(file.path(inputPath,paste("arc/mod1.0_R.rep",sep="")))
+mod1.1 <- readList(file.path(inputPath,paste("arc/mod1.1_R.rep",sep="")))
+AgeFitsSrv(mod1.0,rec_age=4,case_label="2014 1.0 assessment")
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1.1 assessment")
+mod1.1 <- readList(file.path(inputPath,paste("For_R.rep",sep="")))
+mod1.0 <- readList(file.path(inputPath,paste("arc/mod1.0_R.rep",sep="")))
+mod1.1 <- readList(file.path(inputPath,paste("arc/mod1.1_R.rep",sep="")))
+AgeFitsSrv(mod1.0,rec_age=4,case_label="2014 1.0 assessment")
+AgeFitsSrv(mod1.1,rec_age=4,case_label="2014 1.1 assessment")
+compareTime(lstOuts,"SSB",SD=T,Sum=NULL,startYear=1977,ylim=c(0,2000000),main="Spawning biomass",legendPos="topright")
+rec_age=4
+p.rec.hist(mod1.0,main="Model 1.0",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+p.rec.hist(mod1.1,main="Model 1.1",ylab="Recruitment",fy=1983,ly=2014,plotmean="T")
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+lines(mod1.1$Obs_Survey_1[,c(1,3)],lty=2)
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+source("IndexFit.r")
+IndexFit(mod1.0,yf=1985,yl=2014,f=1,main="Model 1.0", ,ylab="Survey biomass (t)",ylim=c(0,2.75e6))
+lines(mod1.1$Obs_Survey_1[,c(1,3)],lty=2)

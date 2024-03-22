@@ -1,0 +1,83 @@
+# amak.dat  
+amak_data.dat
+OM_1  
+#selectivity_shar_matrix 
+1 2 
+1 1 
+#Sr_type 
+2  
+#AgeError 
+0  
+#Retro 
+0  
+#Steepness_Prior CV Phase 
+0.75  0.25  -3  
+#SigmaR 
+0.1  0.25  -4  
+#yrs_sr 
+1  30  
+#Linf
+80	0.25	-4	
+#K
+0.18	0.25	-4	
+#Lo_Len
+27.68796	0.25	-4
+#Sigma_len
+0.1 0.25	-4															
+#Natural_Mortality 
+0.2  0.25  -4 
+# NEW npars_mage
+0
+# NEW Mage_in
+# phase_Mage
+-5
+#Nyrs_Random_walk_M 
+0
+#Random_walk_M_yrs blank if nyrs==0
+#Random_walk_M_sigmas blank if nyrs==0
+#Random_walk_q_phases 
+0
+#catchability 
+3.53631480169909e-07  1 2  
+#q_power 
+1  0.2  -4  
+#Random_walk_q_phases 
+-1
+#Nyrs_Random_walk_q
+0
+#Random_walk_q_yrs blank if nyrs==0
+
+#Random_walk_q_sigmas blank if nyrs==0
+
+#q_agemin 
+1 
+#q_agemax 
+12  
+#junk 
+0.05  
+#n_proj_yrs 
+5  
+#Fsh_selopt_1 
+2  
+#Fsh_ph_1 
+5  
+#Fsh_sel_change_1 
+0
+#slope 
+1 
+#inflection 
+2  
+#
+#Ind_selopt 
+2  
+# Phase Survey
+-5  
+#ind_sel_change_1 
+0
+#slope 
+2 
+#inflection 
+1.5  
+# sigma age-age
+#Test  
+123456789  

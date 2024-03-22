@@ -1,0 +1,46 @@
+AFSC=odbcConnect("AFSC","sbarb","sbarb$1011")
+
+
+Length=sqlQuery(AFSC,"SELECT RACEBASE.LENGTH.REGION,
+  TO_CHAR(RACEBASE.HAUL.START_TIME, 'yyyy') AS YEAR,
+  RACEBASE.LENGTH.CRUISE,
+  RACEBASE.LENGTH.VESSEL,
+  RACEBASE.LENGTH.HAUL,
+  RACEBASE.LENGTH.SPECIES_CODE,
+  RACEBASE.LENGTH.SEX,
+  RACEBASE.LENGTH.LENGTH,
+  RACEBASE.LENGTH.FREQUENCY,
+  RACEBASE.HAUL.END_LONGITUDE,
+  RACEBASE.HAUL.GEAR,
+  RACEBASE.HAUL.STRATUM,
+  RACEBASE.HAUL.HAUL_TYPE
+FROM RACEBASE.LENGTH
+INNER JOIN RACEBASE.HAUL
+ON RACEBASE.LENGTH.CRUISEJOIN                 = RACEBASE.HAUL.CRUISEJOIN
+AND RACEBASE.LENGTH.HAULJOIN                  = RACEBASE.HAUL.HAULJOIN
+WHERE RACEBASE.LENGTH.REGION                  = 'AI'
+AND RACEBASE.LENGTH.SPECIES_CODE              = 21740
+AND TO_CHAR(RACEBASE.HAUL.START_TIME, 'yyyy') >= 1980
+AND RACEBASE.HAUL.HAUL_TYPE                   = 3 ")
+
+
+Length_w<-subset(Length,Length$END_LONGITUDE > 0 | Length$END_LONGITUDE < -170)
+Length_w<-subset(Length_w,Length_w$YEAR!=1982)
+Length_w<-subset(Length_w,Length_w$YEAR!=2010)
+
+
+LENGTH=(data.frame(aggregate(list(FREQ=Length_w$FREQUENCY),by=list(LENGTH=Length_w$LENGTH/10,YEAR=Length_w$YEAR),FUN=sum)))
+Total_L<-aggregate(list(Total=LENGTH$FREQ),by=list(YEAR=LENGTH$YEAR),FUN=sum)
+Total_LB<-merge(LENGTH,Total_L,all=T)
+
+
+
+years<-unique(LENGTH$YEAR)
+lyear<-length(years)
+YEARD<-vector("list",length=lyear)
+for(i in 1:lyear){
+YEARD[[i]]<-subset(LENGTH,YEAR==years[i])
+}
+
+
+

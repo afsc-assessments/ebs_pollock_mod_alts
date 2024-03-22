@@ -1,0 +1,42 @@
+AI_Pcod   #using nonparametric fishery selectivity preferred 2014 model                                 
+0 # SSL Species???                                  
+0 # Constant  buffer  of  Dorn?                             
+1 # Number  of  fsheries                                
+1 # Number  of  sexes??                               
+0.4229608  # average 5yr f estimated fishing mortality for past 5 years model output updated 2014                             
+#this is based on the fully selected fishing mortality and I think that is too high.
+#0.029633 # average 3yr f estimated fishing mortality
+1.0 # author  f                                 
+0.4 # SPR ABC                                 
+0.35  # SPR MSY                                 
+0 # Spawnmo                                   
+10  # Number  of  ages                                
+0.5 # Fratio                                    
+  # 0.5 0.5 # Fratio                              
+#  natural mortality (for each age)
+0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4
+
+# Maturity observers female                   
+0.002924593	0.04105851	0.2098209	0.5126784	0.786134	0.9230804	0.9729864	0.9893226	0.9948935	0.9974016
+ 
+# Wt   kg
+0.08308  0.50132  1.21366  2.26199  3.77054 5.65862  7.74324  9.67701 11.43840 12.65140
+
+# Wt   kg
+0.08308  0.50132  1.21366  2.26199  3.77054 5.65862  7.74324  9.67701 11.43840 12.65140
+
+# Selectivity fishery                            
+0.00353474 0.01331540 0.04883290 0.16340100 0.42629200 0.73868600 0.91492400 0.97614100 0.99361600 0.99831400
+
+# N at  age in  2018              
+31474.500 25455.400 12733.800 11484.600  6461.210  4202.510  1320.500   520.354 201.106   234.705  
+
+# No  Recruitments   length(seq(1990,2018,1))-5                            
+25
+                                                    
+# Recruitment AI$Numbers_at_age[,1][1:25] not divided by 1000.
+
+79269.6 23036.1 30172.1 38462.4 82124.2 37987.4 70738.9 75752.7 43510.3 42373.0 68864.4 68096.0 37759.2 28673.9 32757.6 19606.6 54524.8 46363.2 38377.0 28403.7 18764.4 22062.5 26146.8 41079.1 35314.5
+
+# SSB                                                 
+# used only for S/R analysis so was left unchanged for the 2005, 2006, 2007 2008 2009 assessment

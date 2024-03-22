@@ -1,0 +1,101 @@
+# amak.dat  
+hm.dat
+Model_1 
+#selectivity_shar_matrix 
+1 2 
+1 1 
+#Sr_type 
+2  
+#AgeError 
+1  
+#Retro 
+0
+#Steepness 
+0.8  300  -6  
+#SigmaR 
+1.6  15 -4  
+#yrs_sr 
+1993  2016  
+#Linf
+74.4	0.1	-4																																									
+#K
+0.16	0.1	-4																																									
+#Lo_Len
+18	0.1	-4																																									
+#Sigma_len
+0.09 0.1	-4																																									
+#Natural_Mortality 
+0.15  0.05  -4  
+# NEW npars_mage
+5
+# NEW Mage_in
+0 1 2 3 4 
+0.75 0.45 0.25 0.15 0.05 
+# phase_Mage
+-5
+#Nyrs_Random_walk_M 
+0
+#Random_walk_M_yrs blank if nyrs==0
+
+#Random_walk_M_sigmas blank if nyrs==0
+
+#Random_walk_q_phases 
+-4
+#catchability 
+1  0.2  4  
+#q_power 
+1  0.2  -4  
+#Random_walk_q_phases 
+-1
+#Nyrs_Random_walk_q
+0
+#Random_walk_q_yrs blank if nyrs==0
+
+#Random_walk_q_sigmas blank if nyrs==0
+
+#q_agemin 
+3  
+#q_agemax 
+8  
+#junk 
+0.05  
+#n_proj_yrs 
+10  
+#------Fsh_selopt_1------ 
+1  
+#Fsh_nages_1 
+8  
+#Fsh_ph_1 
+2  
+## Penalty on curvature (for selectivity type 1)
+1
+## Penalty on dome-shapedness (for selectivity type 1)
+1.9
+# nyrs fish selectivity changes
+2
+# Years of selectivity change fishery 
+2000	2014	
+# sigm fish selectivity changes
+0.8 0.8
+# Initial values for params
+0.2 0.7 1 1 0.8 0.5 0.5 0.2 0.2 0.2 0.2 0.2 
+#------Ind_selopt------ 
+1  
+# Selages
+8  
+# Phase Survey
+2  
+# sigma age-age
+1
+# sigma Dome... 
+10
+# Years of selectivity change survey 
+# nyrs fish selectivity changes
+0
+# Yrs fish selectivity changes
+# sigm fish selectivity changes
+# Initial values for coefficitients at each change (one for every change plus 1) 
+0.001 1 1 0.7 0.5 0.4 0.3 0.2 0.2 0.2 0.2 0.2 
+#Test  
+123456789  
+

@@ -1,0 +1,17 @@
+---
+author:
+  - name: Kelli F. Johnson
+    code: 1
+    first: K
+    middle: F
+    family: Johnson
+author_list: Johnson, K.F
+affiliation:
+  - code: 1
+    address: Northwest Fisheries Science Center, U.S. Department of Commerce, National
+      Oceanic and Atmospheric Administration, National Marine Fisheries Service, 2725
+      Montlake Boulevard East, Seattle, Washington 98112
+address: ^1^Northwest Fisheries Science Center, U.S. Department of Commerce, National
+  Oceanic and Atmospheric Administration, National Marine Fisheries Service, 2725
+  Montlake Boulevard East, Seattle, Washington 98112
+---

@@ -1,0 +1,95 @@
+---
+title: "Atka mackerel assessment 2020"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    code_folding: hide
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_knit$set(root.dir=here::here("Atka"))
+knitr::opts_chunk$set(warning=F, message=F, echo=F, results=F,fig.width=6, fig.height=5)
+```
+
+
+Annoted data files can be found in the Excel spreadsheet `JM Data files for SC08.xlsx` on [`SPRFMO Teams/sharepoint`](https://southpacificrfmo.sharepoint.com/:f:/s/SPRFMOSC8/EojhefvAJq9KhLVw4AqPUPYBXrW_eBaOTt9-tc3fGwtN_w?e=tek4yE).
+
+Currently, the files resulting from the model runs are not on the Github site, so this `.rmd` file cannot be recompiled without first running the code found in `jjm/assessment/R/SC08.R` to run all the models. Prior to doing this, please compile the latest `jjm/src/jjms.tpl`.
+
+
+# Model Naming Convention
+File naming conventions reflect the year and option.
+
+Model      | Description
+-----------|--------------
+Model 16.0b| Same as past year
+Model 16.0b| Same as past year
+Model 20.0 | Comparison of new selectivity parameterization (3 parameter double logistic)
+-----------|--------------
+
+Make sure that the R scripts are sourced.
+
+```{r install_packages, eval=F, cache=F, echo=T}
+if(!'devtools' %in% installed.packages()) install.packages('devtools')
+if(!'kableExtra' %in% installed.packages()) install.packages('kableExtra')
+```
+
+You'll need to be in the `Atka' directory in order for the code here to run.
+
+```{r pkgs, echo=T}
+source("R/prelims.R")
+.THEME=ggthemes::theme_few()
+library(kableExtra)
+```
+
+# Model runs
+Re-running the `r as.numeric(format(Sys.time(), "%Y"))-1` model and comparing the results with this year's assessment.
+
+
+## Models {.tabset}
+```{r load_prev_h1}
+modlyr   <- readList("2019_Final/For_R.rep")
+mod16.0b <- readList("mod16b/For_R.rep")
+mod20 <- readList("m20/For_R.rep")
+lstOut1  <- list( "2019 Assessment"= modlyr, "Current assessment"= mod16.0b, "New selectivity"=mod20)
+M <- lstOuts <- lstOut1
+
+```
+### Biomass
+
+```{r biomass_ , fig.cap=paste0("Plot comparing biomass estimated by last year's model (", names(lstOuts), ") with a re-run of the model this year (", names(lstOuts[1]),").")}
+df  <- data.table(Model = "16.0b", mod16.0b$SSB )
+df <- rbind(df, data.table(Model="Last year",modlyr$SSB))
+modlyr$SSB
+df <- rbind(df, data.table(Model="3-parameter double logistic" ,mod20$SSB))
+names(df) <- c("Model","yr","SSB","SE","lb","ub")
+bdf <- filter(df,yr>1980,yr<=2020) %>% arrange(yr)
+# try over same time range...
+p1 <- ggplot(data=bdf,aes(x=yr,y=SSB,alpha=0.3,color=Model)) + scale_y_continuous(limits=c(0,600000)) + ylab("Spawning biomass") + 
+          xlab("Year") +  theme_few(base_size=11) + geom_line(data=bdf,aes(x=yr,y=SSB,type=Model)) +
+          geom_ribbon(data=bdf ,aes(x=yr,y=SSB,ymin=lb,ymax=ub,fill=Model),alpha=.3)  + guides(alpha=FALSE,col=FALSE) 
+p1
+
+#oldnewMods <- combineModels(mod0.00,mod_prev)
+
+#plot(oldnewMods,combine=T,what="biomass",stack=F,main="Biomass")
+
+```
+
+``
+
+### Selectivity
+```{r select.00, fig.cap=paste0("Plot comparing recruitment estimated by last year's model (", names(lstOuts), ") with a re-run of the model this year (", names(lstOuts),").")}
+```
+### Recruitment
+```{r recruit_h2_0.00, fig.cap=paste0("Plot comparing recruitment estimated by last year's model (", names(lstOuts), ") with a re-run of the model this year (", names(lstOuts),").")}
+captyr = "This year"
+
+AgeFits(mod16.0b,rec_age=1,case_label=captyr)
+```

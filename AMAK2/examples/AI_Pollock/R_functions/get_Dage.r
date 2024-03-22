@@ -1,0 +1,54 @@
+get_Dage<-function(species=201,area="AI"){
+  if(area=="AI"){
+    reg<-"539 and 544"
+  }
+  if(area=="GOA"){
+    reg<-"600 and 699"
+  }
+  if(area=="BS"){
+    reg<-"500 and 539"
+  }
+
+  test=paste("SELECT OBSINT.DEBRIEFED_AGE.YEAR,\n ",
+    "OBSINT.DEBRIEFED_AGE.NMFS_AREA,\n ",
+    "OBSINT.DEBRIEFED_AGE.SPECIES,\n ",
+    "OBSINT.DEBRIEFED_AGE.SEX,\n ",
+    "OBSINT.DEBRIEFED_AGE.LENGTH,\n ",
+    "OBSINT.DEBRIEFED_AGE.AGE,\n ",
+    "OBSINT.DEBRIEFED_AGE.WEIGHT,\n ",
+    "OBSINT.DEBRIEFED_AGE.LATDD_END,\n ",
+    "OBSINT.DEBRIEFED_AGE.LONDD_END,\n ",
+    "OBSINT.DEBRIEFED_AGE.GEAR\n ",
+  "FROM OBSINT.DEBRIEFED_AGE\n ",
+  "WHERE OBSINT.DEBRIEFED_AGE.NMFS_AREA BETWEEN ",reg,"\n ",
+  "AND OBSINT.DEBRIEFED_AGE.SPECIES = ",species,"\n ",
+  "ORDER BY OBSINT.DEBRIEFED_AGE.YEAR",sep="")
+  
+  ## for pre-2008 data
+  #test2=paste("SELECT NORPAC.DOMESTIC_AGE.YEAR,\n ",
+  #"NORPAC.DOMESTIC_HAUL.NMFS_AREA,\n ",
+  #"NORPAC.DOMESTIC_AGE.SPECIES,\n ",
+  #"NORPAC.DOMESTIC_AGE.SEX, \n ",
+  #"NORPAC.DOMESTIC_AGE.LENGTH,\n ",
+  #"NORPAC.DOMESTIC_AGE.AGE,\n ",
+  #"NORPAC.DOMESTIC_AGE.WEIGHT,\n ",
+  #"NORPAC.DOMESTIC_HAUL.LATDD_END,\n ",
+  #"NORPAC.DOMESTIC_HAUL.LONDD_END,\n ",
+  #"NORPAC.DOMESTIC_HAUL.GEAR_TYPE \n ",
+  #"FROM NORPAC.DOMESTIC_AGE \n ",
+  #INNER JOIN NORPAC.DOMESTIC_HAUL\n ",
+  #"ON NORPAC.DOMESTIC_HAUL.HAUL_JOIN    = NORPAC.DOMESTIC_AGE.HAUL_JOIN \n ",
+  #"WHERE NORPAC.DOMESTIC_HAUL.NMFS_AREA BETWEEN ",reg,"\n ",
+  #"AND NORPAC.DOMESTIC_AGE.SPECIES      = ", species,"\n ",
+  #"AND NORPAC.DOMESTIC_AGE.YEAR < 2008 \n",
+  #"ORDER BY NORPAC.DOMESTIC_AGE.YEAR", sep="")
+
+  Dage=sqlQuery(AFSC,test)
+  #Dage2=sqlQuery(AFSC,test2)
+  #names(Dage2)<-names(Dage1)
+  #Dage=rbind(Dage2,Dage1)
+  Dage
+  }
+  
+  
+  

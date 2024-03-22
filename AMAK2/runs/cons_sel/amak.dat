@@ -1,0 +1,195 @@
+#
+pm_2020.dat
+ebswp
+# 2 3 4 1 2 3 4 5 6 7 8 9  
+#1 1 1 1 2 1 1 2 1 1 1 1 1  
+#1 2 3 4 1 1 2 4 3 3 4 4 4  
+#selectivity_shar_matrix 
+1 2 2 2 2 2 
+1 1 2 3 4 2
+#Sr_type 
+2
+#AgeError 
+1
+#Retro 
+0
+# surv_dwnwt
+0.7
+# cv_inc
+0.2
+# n_comp
+-6
+
+#Steepness 
+0.7 0.2 -6
+#SigmaR 
+0.6 0.05 -4
+#yrs_sr 
+1978 2017
+#Linf
+74.4	0.1	-4																																									
+#K
+0.16	0.1	-4																																									
+#Lo_Len
+18	0.1	-4																																									
+#Sigma_len
+0.09 0.1	-4																																									
+#Natural_Mortality 
+0.3 0.2 -4
+# npars_mage
+3
+# ages_M_changes
+1 2 3
+# NEW Mage_in
+0.9 0.6 0.3
+# phase_Mage
+-5
+# phase_rw_Mage
+-5
+#Nyrs_Random_walk_M 
+0
+#Random_walk_M_yrs blank if nyrs==0
+
+#Random_walk_M_sigmas blank if nyrs==0
+
+#catchability 
+1 1 1 1 .1
+#catchability prior sigma
+.3 .3 10 10 10
+#q_phases 
+4 4 1 1 3
+#q_power 
+1 1 1 1 1
+#q_power_CV
+.1 .1 .1 .1 .1
+#q_power_phase
+-1 -1 -1 -1 -1
+#Random_walk_q_phases 
+-4 -4 -4 -4 -4
+#Nyrs_Random_walk_q
+0 0 0 0 0
+#Random_walk_q_yrs blank if nyrs==0
+
+#Random_walk_q_sigmas blank if nyrs==0
+
+#q_agemin 
+5 2 1 1  2
+#q_agemax 
+12 5 1 1 5
+#junk 
+0.05
+#n_proj_yrs 
+5
+#Fsh_selopt_1 
+1
+#Fsh_nages_1 
+8
+#Fsh_ph_1 
+3
+#Fsh_curvpen_1 
+0.2
+#Fsh_domepen_1 
+0.2
+#Fsh_sel_change_1 
+# nyrs fish selectivity changes
+3
+# Yrs fish selectivity changes
+1990 1999 2008
+# sigm fish selectivity changes
+0.2 0.2 0.2
+# Initial values for coefficitients at each change (one for every change plus 1) 
+0 0.1 0.5 0.8 1 1 1 1 1 1 1 1 1 1 1
+#
+#BTS_selopt 
+1
+#Ind_nages
+8
+#Ind_ph
+3
+#Ind_curvPen
+0.1
+#Ind_domePen
+0.1
+# nyrs fish selectivity changes
+0
+# Yrs fish selectivity changes
+
+# sigm fish selectivity changes
+
+# Ages of selectivity change 
+0 0.1 0.5 0.8 1 1 1 1 1 1 1 1 1 1 1
+#ATS_selopt 
+1
+#Ind_nages
+8
+#Ind_ph
+-3
+#Ind_curvPen
+0.1
+#Ind_domePen
+0.1
+# nyrs fish selectivity changes
+0
+# Yrs fish selectivity changes
+
+# sigm fish selectivity changes
+
+# Ages of selectivity change ATS
+0 0.9 0.8 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7
+#Age_1_BTS_selopt 
+1
+#Ind_nages
+8
+#Ind_ph
+-3
+#Ind_curvPen
+0.1
+#Ind_domePen
+0.1
+# nyrs fish selectivity changes
+0
+# Yrs fish selectivity changes
+
+# sigm fish selectivity changes
+
+# Ages of selectivity change Fishery 2
+1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+#Age_1_ATS_selopt 
+1
+#Ind_nages
+8
+#Ind_ph
+-3
+#Ind_curvPen
+0.1
+#Ind_domePen
+0.1
+# nyrs fish selectivity changes
+0
+# Yrs fish selectivity changes
+
+# sigm fish selectivity changes
+
+# Ages of selectivity change Fishery 2
+1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+#AVO_selopt 
+1
+#Ind_nages
+8
+#Ind_ph
+-3
+#Ind_curvPen
+0.1
+#Ind_domePen
+0.1
+# nyrs fish selectivity changes
+0
+# Yrs fish selectivity changes
+
+# sigm fish selectivity changes
+
+# Ages of selectivity change Fishery 2
+0 0.9 0.8 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7
+#Age_1_BTS_selopt 
+#Test
+123456789

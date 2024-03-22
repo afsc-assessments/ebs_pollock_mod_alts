@@ -1,0 +1,90 @@
+# Compiled Object files
+amak
+*.swp
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+.Rproj.user
+*~
+Icon*
+
+# API files
+html/
+docs/api/html/
+
+# Latex files
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.nav
+*.toc
+*.snm
+*.vrb
+*.tex.bak
+*.bak
+auto/
+
+# R files
+.Rproj.user
+*.Rout
+*.R~
+.RData
+.Rhistory
+*.Rmd.bak
+Rplots.pdf
+
+# ADMB build files
+src/lib/*.obj
+src/build/*
+src/gmacs.cpp
+src/gmacs.exe
+src/gmacs.htp
+src/gmacs.obj
+src/moltIncrement.cpp
+
+# ADMB standard output files
+*.b0*
+*.bar
+*.cor
+*.cov
+*.dep
+*.ecm
+*.eva
+gradient.*
+*.hes
+*.log
+*.mc2
+*.mcm
+*.p0*
+*.psv
+*.hst
+*.par
+*.rep
+*.r0*
+*.std
+*_in.ctl
+*_in.dat
+# Added for MCMC runs
+adaptation.csv
+unbounded.csv
+init.pin
+variance
+sims

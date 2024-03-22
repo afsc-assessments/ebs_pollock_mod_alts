@@ -1,0 +1,103 @@
+#
+ai13b.dat
+ai13_B
+#selectivity_shar_matrix 
+1 2
+1 1
+#Sr_type 
+2
+#AgeError 
+1
+#Retro 
+0
+#Steepness 
+0.7 0.2 -6
+#SigmaR 
+0.6 0.05 -4
+#yrs_sr 
+1976 2013
+#Linf
+74.4	0.1	-4																																									
+#K
+0.16	0.1	-4																																									
+#Lo_Len
+18	0.1	-4																																									
+#Sigma_len
+0.09 0.1	-4																																									
+#Natural_Mortality 
+0.2 0.2 4
+# NEW npars_mage
+0
+# NEW Mage_in
+
+# phase_Mage
+-5
+#Nyrs_Random_walk_M 
+0
+#Random_walk_M_yrs blank if nyrs==0
+
+#Random_walk_M_sigmas blank if nyrs==0
+
+#Random_walk_q_phases 
+-4
+#catchability 
+1 0.1 -4
+#q_power 
+1 0.1 -4
+#Random_walk_q_phases 
+-1
+#Nyrs_Random_walk_q
+0
+#Random_walk_q_yrs blank if nyrs==0
+
+#Random_walk_q_sigmas blank if nyrs==0
+
+#q_agemin 
+5
+#q_agemax 
+12
+#junk 
+0.05
+#n_proj_yrs 
+5
+#Fsh_selopt_1 
+1
+#Fsh_nages_1 
+8
+#Fsh_ph_1 
+3
+#Fsh_curvpen_1 
+0.2
+#Fsh_domepen_1 
+0.2
+#Fsh_sel_change_1 
+# nyrs fish selectivity changes
+2
+# Yrs fish selectivity changes
+1990 1999
+# sigm fish selectivity changes
+0.2 0.2
+# Initial values for coefficitients at each change (one for every change plus 1) 
+0.1 0.5 0.8 1 1 1 1 1 1 1 1 1 1 1
+#
+#Ind_selopt 
+1
+#Ind_nages
+8
+#Ind_ph
+3
+#Ind_curvPen
+0.1
+#Ind_domePen
+0.1
+# nyrs fish selectivity changes
+0
+# Yrs fish selectivity changes
+
+# sigm fish selectivity changes
+
+# Ages of selectivity change Fishery 2
+#
+0.1 0.5 0.8 1 1 1 1 1 1 1 1 1 1 1
+#Test
+123456789

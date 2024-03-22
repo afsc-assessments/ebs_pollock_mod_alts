@@ -1,0 +1,93 @@
+# Uses new Peruvian CPUE data
+Pcod_2018.dat  
+Model_1  
+# Selectivity sharing vector (number_fisheries + number_surveys)  
+#Fsh 1 Srv_1 
+1 2 
+1 1
+#Sr_type 
+1  
+#AgeError 
+0  
+#Retro 
+0  
+#Steepness 
+0.8 300 -6  
+#SigmaR 
+0.6 15 -4  
+#yrs_sr 
+1977 2017 
+#Linf
+91.97	0.5	-4																																									
+#K
+0.24 0.1	-4																																									
+#Lo_Len
+30	0.1	-4																																									
+#Sigma_len
+0.09 0.1	-4																																									
+#Natural_Mortality 
+0.38 0.05 -4  
+#Number of ages where M changes
+0
+#Phase_Age_M
+-5
+#Phase_Random_walk_M 
+-4
+#Nyrs_Random_walk_M 
+0
+#Random_walk_M_yrs blank if nyrs==0
+
+#Random_walk_M_sigmas blank if nyrs==0
+
+#catchability 
+0.7632  
+1.2 
+3  
+#q_power                    
+1 
+1.2 
+-1 
+#Random_walk_q_phases                    
+-1 
+#Nyrs_Random_walk_q
+0  
+#Random_walk_q_yrs blank if nyrs==0
+
+#Random_walk_q_sigmas blank if nyrs==0
+
+#q_agemin                    
+2 
+#q_agemax                    
+10 
+#junk                    
+0.05  
+#n_proj_yrs                    
+10  
+#---------------------------------------------------------
+# Fishery 1 
+1  #selectivity type
+9  #n_sel_ages
+2  #phase sel
+.5  #curvature penalty
+5  #Dome-shape penalty
+# nYears of selectivity change Fishery 1 
+10
+# Years of selectivity change Fishery 1 
+1978 1981 1984 1987 1990 2003 2006 2009 2012 2015
+0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 
+# Initial values for coefficitients at each change (one for every change plus 1)  
+# 2 3 4 5 6 7 8 9 10 11 12  
+0.2 0.7 1 1 1 1 1 1 1 1 1 1  
+#---------------------------------------------------------
+# Index number 1 EBS_Shelf survey  
+1  
+10  
+2  
+0.25  
+100  
+0
+0.3 1 1 1 1 1 1 1 1 1 1 1
+#---------------------------------------------------------
+#Test  
+123456789  
+

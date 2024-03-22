@@ -1,0 +1,35 @@
+<h1 id="admb-code-and-datafiles-for-the-chub-mackerel-assessment">ADMB code and datafiles for the Chub mackerel assessment</h1>
+<h1 id="models-run-in-2015">Models run in 2015</h1>
+<h3 id="naming-convention">Naming convention</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Model</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mod0</td>
+<td align="left">- Basecase (last year's VPA model)</td>
+</tr>
+<tr class="even">
+<td align="left">Mod1</td>
+<td align="left">- AMAK version from 1950</td>
+</tr>
+<tr class="odd">
+<td align="left">Mod2</td>
+<td align="left">- AMAK version from 1950 but includes China/Japan Pacific catches</td>
+</tr>
+</tbody>
+</table>
+<h3 id="notes-on-running-2015-models">Notes on running 2015 models</h3>
+<h4 id="admb-model-running-scripts">ADMB model-running scripts</h4>
+<p><code>run_retro.sh</code> script that uses mod1.ctl to substitute peels (line 12) from 0-15<br /><code>run_mod.sh</code> script that uses number argument to execute a model<br /><code>run.bat</code> script that uses number argument to execute a model<br /><code>proj.sh</code> script for picking number argument and running projection model in subdirectory proj</p>
+<h4 id="r-scripts">R scripts</h4>
+<p>To be updated</p>
+<h1 id="questions-on-chub-mackerel">Questions on Chub mackerel</h1>
+<ol style="list-style-type: decimal">
+<li>Are the data going to change in the near term?</li>
+<li></li>
+</ol>
