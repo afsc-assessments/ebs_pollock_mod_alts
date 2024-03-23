@@ -254,7 +254,7 @@ model_data::model_data(int argc,char * argv[]) : ad_comm(argc,argv)
 void model_parameters::initializationfunction(void)
 {
   mean_log_initN.set_initial_value(0.0);
-  mean_log_recruit.set_initial_value(0.0);
+  mean_log_recruit.set_initial_value(12.0);
   mean_log_F.set_initial_value(-1.6);
   M.set_initial_value(0.30);
   log_q1_mean.set_initial_value(0.0);
@@ -298,8 +298,8 @@ model_parameters::model_parameters(int sz,int argc,char * argv[]) :
 {
   initializationfunction();
   M.allocate(rcrage,trmage,0.1,5.0,-1,"M");
-  mean_log_initN.allocate(-15,15,-1,"mean_log_initN");
-  dev_log_initN.allocate(rcrage+1,trmage,-15,15,-2,"dev_log_initN");
+  mean_log_initN.allocate(-15,15,1,"mean_log_initN");
+  dev_log_initN.allocate(rcrage+1,trmage,-15,15,2,"dev_log_initN");
   initN.allocate(rcrage+1,trmage,"initN");
   #ifndef NO_AD_INITIALIZE
     initN.initialize();
@@ -350,7 +350,7 @@ model_parameters::model_parameters(int sz,int argc,char * argv[]) :
   log_slp1_fsh_mean.allocate(-5,5,4,"log_slp1_fsh_mean");
   inf1_fsh_mean.allocate(1,5,4,"inf1_fsh_mean");
   log_slp2_fsh_mean.allocate(-5,5,4,"log_slp2_fsh_mean");
-  inf2_fsh_mean.allocate(7,20,4,"inf2_fsh_mean");
+  inf2_fsh_mean.allocate(7,20,6,"inf2_fsh_mean");
   slp1_fsh_dev.allocate(styr,endyr,-5,5,7,"slp1_fsh_dev");
   inf1_fsh_dev.allocate(styr,endyr,-5,5,7,"inf1_fsh_dev");
   slp2_fsh_dev.allocate(styr,endyr,-5,5,-1,"slp2_fsh_dev");
@@ -724,6 +724,7 @@ void model_parameters::preliminary_calculations(void)
        catp(i,j) = 0;
      }
     }
+		catp(i) = catp(i)/sum(catp(i));
   }
  for (i=1;i<=nyrsac_srv1;i++) {
    for (j=rcrage;j<=trmage;j++) {
@@ -736,6 +737,7 @@ void model_parameters::preliminary_calculations(void)
        srvp1(i,j) = 0;
      }
    }
+		srvp1(i) = srvp1(i)/sum(srvp1(i));
  }
   for (i=1;i<=nyrsac_srv2;i++) {
     for (j=rcrage;j<=trmage;j++) {
@@ -748,6 +750,7 @@ void model_parameters::preliminary_calculations(void)
 	srvp2(i,j) = 0;
       }
     }
+		srvp2(i) = srvp2(i)/sum(srvp2(i));
   }
 	
   // Survey 6
@@ -762,6 +765,7 @@ void model_parameters::preliminary_calculations(void)
 	srvp6(i,j) = 0;
       }
     }
+		srvp6(i) = srvp6(i)/sum(srvp6(i));
   }
   o = 0.00001;
   var_prof.set_stepnumber(30);
@@ -919,8 +923,10 @@ void model_parameters::Expected_values(void)
 {
   ofstream& report1= *pad_report1;
  for (i=styr;i<=endyr;i++){
-   Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
-   Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
+   //Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
+   //Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
+   Ecattot(i) = 1000*sum(elem_prod(C(i),wt_fsh(i)));
+   Eecocon(i) = 1000*sum(elem_prod(Eec(i),wt_pop(i)));
    Ecatp(i) = (C(i)/sum(C(i)))*age_trans;
    Elenp(i) = Ecatp(i) * len_trans1;
    Eindxsurv1(i)= q1(i)*sum(elem_prod(elem_prod(elem_prod(N(i),mfexp(-yrfrct_srv1(i)*Z(i))),slctsrv1),wt_srv1(i)));
@@ -1082,12 +1088,14 @@ void model_parameters::Projections(void)
     Nsrv_proj(i,j)=N_proj(i,j)*mfexp(-yrfrct_srv6(endyr)*Z_proj(i,j));  
   }
   //  Total catches and biomass
-  Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
+  //Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
+  Ecattot_proj(i) = 1000*sum(elem_prod(C_proj(i),wt_fsh_proj));
   // 3+ biomass
   Esumbio_proj(i)= N_proj(i)(rcrage+2,trmage)*wt_pop_proj(rcrage+2,trmage);
   // Alternative: 2+ biomass
   //    Esumbio_proj(i)= N_proj(i)(rcrage+1,trmage)*wt_pop_proj(rcrage+1,trmage);
-  Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
+  // Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
+  Exrate_proj(i)=Ecattot_proj(i)/(1000*Esumbio_proj(i));
   Espawnbio_proj(i)= sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-0.21*Z_proj(i))),wt_spawn_proj),0.5*mat));
   //Summer acoustic
   //    Esrv_proj(i)= q6*sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-yrfrct_srv6(endyr)*Z_proj(i))),slctsrv6),wt_srv_proj));
@@ -1415,7 +1423,7 @@ void model_parameters::set_runtime(void)
   dvector temp("{1.e0, 1.e-1, 1.e-4, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7}");
   convergence_criteria.allocate(temp.indexmin(),temp.indexmax());
   convergence_criteria=temp;
-  dvector temp1("{1000, 1000, 1000, 1000}");
+  dvector temp1("{100, 1000, 1000, 100000}");
   maximum_function_evaluations.allocate(temp1.indexmin(),temp1.indexmax());
   maximum_function_evaluations=temp1;
 }

@@ -270,7 +270,7 @@ DATA_SECTION
 INITIALIZATION_SECTION
 
   mean_log_initN      0.0   // Mean log initial age composition
-  mean_log_recruit    0.0   // Mean log recruitment 
+  mean_log_recruit   12.0   // Mean log recruitment 
   mean_log_F        -1.6   // Mean log fishing mortality
 
   M                  0.30  // Natural mortality
@@ -326,8 +326,8 @@ PARAMETER_SECTION
  // Population parameters
   //  init_bounded_number M(0.1,0.5,-1)
   init_bounded_vector M(rcrage,trmage,0.1,5.0,-1)
-  init_bounded_number mean_log_initN(-15,15,-1)
-  init_bounded_dev_vector dev_log_initN(rcrage+1,trmage,-15,15,-2)
+  init_bounded_number mean_log_initN(-15,15,1)
+  init_bounded_dev_vector dev_log_initN(rcrage+1,trmage,-15,15,2)
   vector initN(rcrage+1,trmage)
   init_bounded_number mean_log_recruit(-15,15,1)
   init_bounded_dev_vector dev_log_recruit(styr,endyr,-15,15,3)
@@ -357,7 +357,7 @@ PARAMETER_SECTION
   init_bounded_number log_slp1_fsh_mean(-5,5,4)
   init_bounded_number inf1_fsh_mean(1,5,4)
   init_bounded_number log_slp2_fsh_mean(-5,5,4)
-  init_bounded_number inf2_fsh_mean(7,20,4)
+  init_bounded_number inf2_fsh_mean(7,20,6)
   //    init_bounded_number log_slp2_fsh_mean(-5,5,-1)	  
   //    init_bounded_number inf2_fsh_mean(7,20,-1)	  
   init_bounded_dev_vector slp1_fsh_dev(styr,endyr,-5,5,7)
@@ -533,6 +533,7 @@ PRELIMINARY_CALCS_SECTION
        catp(i,j) = 0;
      }
     }
+		catp(i) = catp(i)/sum(catp(i));
   }
 
 // Survey 1
@@ -547,6 +548,7 @@ PRELIMINARY_CALCS_SECTION
        srvp1(i,j) = 0;
      }
    }
+		srvp1(i) = srvp1(i)/sum(srvp1(i));
  }
 
 // Survey 2
@@ -561,6 +563,7 @@ PRELIMINARY_CALCS_SECTION
 	srvp2(i,j) = 0;
       }
     }
+		srvp2(i) = srvp2(i)/sum(srvp2(i));
   }
 	
   // Survey 6
@@ -575,6 +578,7 @@ PRELIMINARY_CALCS_SECTION
 	srvp6(i,j) = 0;
       }
     }
+		srvp6(i) = srvp6(i)/sum(srvp6(i));
   }
 
   o = 0.00001;
@@ -722,8 +726,10 @@ FUNCTION Catch_at_age
 
 FUNCTION Expected_values
  for (i=styr;i<=endyr;i++){
-   Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
-   Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
+   //Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
+   //Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
+   Ecattot(i) = 1000*sum(elem_prod(C(i),wt_fsh(i)));
+   Eecocon(i) = 1000*sum(elem_prod(Eec(i),wt_pop(i)));
    Ecatp(i) = (C(i)/sum(C(i)))*age_trans;
    Elenp(i) = Ecatp(i) * len_trans1;
    Eindxsurv1(i)= q1(i)*sum(elem_prod(elem_prod(elem_prod(N(i),mfexp(-yrfrct_srv1(i)*Z(i))),slctsrv1),wt_srv1(i)));
@@ -898,12 +904,14 @@ FUNCTION Projections
     Nsrv_proj(i,j)=N_proj(i,j)*mfexp(-yrfrct_srv6(endyr)*Z_proj(i,j));  
   }
   //  Total catches and biomass
-  Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
+  //Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
+  Ecattot_proj(i) = 1000*sum(elem_prod(C_proj(i),wt_fsh_proj));
   // 3+ biomass
   Esumbio_proj(i)= N_proj(i)(rcrage+2,trmage)*wt_pop_proj(rcrage+2,trmage);
   // Alternative: 2+ biomass
   //    Esumbio_proj(i)= N_proj(i)(rcrage+1,trmage)*wt_pop_proj(rcrage+1,trmage);
-  Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
+  // Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
+  Exrate_proj(i)=Ecattot_proj(i)/(1000*Esumbio_proj(i));
   Espawnbio_proj(i)= sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-0.21*Z_proj(i))),wt_spawn_proj),0.5*mat));
   //Summer acoustic
   //    Esrv_proj(i)= q6*sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-yrfrct_srv6(endyr)*Z_proj(i))),slctsrv6),wt_srv_proj));
@@ -1253,7 +1261,7 @@ FUNCTION MCMC_output
 RUNTIME_SECTION
 
   convergence_criteria 1.e0, 1.e-1, 1.e-4, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7
-  maximum_function_evaluations 1000, 1000, 1000, 1000
+  maximum_function_evaluations 100, 1000, 1000, 100000
 
 TOP_OF_MAIN_SECTION
  arrmblsize = 3000000;
