@@ -1,9 +1,11 @@
-#
-pm_2020.dat
+#dataFile
+pm_2023.dat
+#modelName
 ebswp
-# 2 3 4 1 2 3 4 5 6 7 8 9  
-#1 1 1 1 2 1 1 2 1 1 1 1 1  
-#1 2 3 4 1 1 2 4 3 3 4 4 4  
+#nStocks
+1
+#nameStocks
+EBS_Pollock
 #selectivity_shar_matrix 
 1 2 2 2 2 2 
 1 1 2 3 4 2
@@ -13,19 +15,22 @@ ebswp
 0
 #Retro 
 0
-# surv_dwnwt
-0.7
-# cv_inc
-0.2
-# n_comp
--6
-
+#recMatrix
+1
 #Steepness 
-0.7 0.1  6
+0.7 0.1  -6
 #SigmaR 
 0.67 0.05 -4
-#yrs_sr 
-1978 2017
+#phase_Rzero 
+4 
+#Nyrs_sr 
+44
+#yrs_sr_1 
+1978 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993
+1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
+2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021
+#GrowMatrix 
+1 
 #Linf
 74.4	0.1	-4																																									
 #K
@@ -34,6 +39,8 @@ ebswp
 18	0.1	-4																																									
 #Sigma_len
 0.09 0.1	-4																																									
+#NMatrix
+1
 #Natural_Mortality 
 0.3 0.2 -4
 # npars_mage
@@ -42,9 +49,9 @@ ebswp
 1 2 3
 # NEW Mage_in
 0.9 0.6 0.3
-# phase_Mage
+#phase_Mage
 -5
-# phase_rw_Mage
+#phase_rw_Mage
 -5
 #Nyrs_Random_walk_M 
 0
@@ -52,6 +59,8 @@ ebswp
 
 #Random_walk_M_sigmas blank if nyrs==0
 
+#qMatrix
+1
 #catchability 
 1 1 1 1 .1
 #catchability prior sigma
@@ -92,14 +101,14 @@ ebswp
 0.9
 #Fsh_sel_change_1 
 # nyrs fish selectivity changes
-55
+58
 # Yrs fish selectivity changes
 1965 1966 1967 1968 1969 1970 1971 1972 1973 1974 1975 1976 1977 1978 1979 1980 1981
 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998
 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
-2016 2017 2018 2019
+2016 2017 2018 2019 2020 2021 2022
 # sigm fish selectivity changes
-0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 
+0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 
 # Initial values for coefficitients at each change (one for every change plus 1) 
 0 0.1 0.5 0.8 1 1 1 1 1 1 1 1 1 1 1
 #
