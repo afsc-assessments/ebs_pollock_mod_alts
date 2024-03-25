@@ -298,8 +298,8 @@ model_parameters::model_parameters(int sz,int argc,char * argv[]) :
 {
   initializationfunction();
   M.allocate(rcrage,trmage,0.1,5.0,-1,"M");
-  mean_log_initN.allocate(-15,15,1,"mean_log_initN");
-  dev_log_initN.allocate(rcrage+1,trmage,-15,15,2,"dev_log_initN");
+  mean_log_initN.allocate(-15,15,-1,"mean_log_initN");
+  dev_log_initN.allocate(rcrage+1,trmage,-15,15,-2,"dev_log_initN");
   initN.allocate(rcrage+1,trmage,"initN");
   #ifndef NO_AD_INITIALIZE
     initN.initialize();
@@ -353,8 +353,8 @@ model_parameters::model_parameters(int sz,int argc,char * argv[]) :
   inf2_fsh_mean.allocate(7,20,6,"inf2_fsh_mean");
   slp1_fsh_dev.allocate(styr,endyr,-5,5,7,"slp1_fsh_dev");
   inf1_fsh_dev.allocate(styr,endyr,-5,5,7,"inf1_fsh_dev");
-  slp2_fsh_dev.allocate(styr,endyr,-5,5,-1,"slp2_fsh_dev");
-  inf2_fsh_dev.allocate(styr,endyr,-5,5,-1,"inf2_fsh_dev");
+  slp2_fsh_dev.allocate(styr,endyr,-5,5,6,"slp2_fsh_dev");
+  inf2_fsh_dev.allocate(styr,endyr,-5,5,7,"inf2_fsh_dev");
   slp1_fsh.allocate(styr,endyr,"slp1_fsh");
   #ifndef NO_AD_INITIALIZE
     slp1_fsh.initialize();
@@ -390,7 +390,7 @@ model_parameters::model_parameters(int sz,int argc,char * argv[]) :
     F.initialize();
   #endif
   log_q1_mean.allocate(-10,10,5,"log_q1_mean");
-  log_q1_dev.allocate(styr,endyr,-5,5,5,"log_q1_dev");
+  log_q1_dev.allocate(styr,endyr,-5,5,-5,"log_q1_dev");
   log_q2_mean.allocate(-10,10,5,"log_q2_mean");
   log_q2_dev.allocate(styr,endyr,-5,5,-1,"log_q2_dev");
   log_q3_mean.allocate(-10,10,6,"log_q3_mean");
@@ -843,8 +843,9 @@ void model_parameters::Selectivity(void)
  // The plan would be to check and adjust the max selected age as needed
    slctfsh(i)=slctfsh(i)/slctfsh(i,7);
  }
- M(1)=1.39; M(2)=0.69; M(3)=0.48; M(4)=0.37; M(5)=0.34;
- M(6)=0.30; M(7)=0.30; M(8)=0.29; M(9)=0.28; M(10)=0.29;
+ M(1)=0.9; M(2)=0.45; M(3)=0.3; M(4)=0.3; M(5)=0.3;
+ M(6)=0.30; M(7)=0.30; M(8)=0.30; M(9)=0.30; M(10)=0.30;
+ //0.9	0.45	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3
  for(int i=1; i<=10; i++) M(i)*=natMscalar;
  for (j=rcrage;j<=trmage;j++) {
    slctsrv1(j) = (1-1/(1+mfexp(-mfexp(log_slp2_srv1)*(double(j)-inf2_srv1))));
@@ -923,10 +924,8 @@ void model_parameters::Expected_values(void)
 {
   ofstream& report1= *pad_report1;
  for (i=styr;i<=endyr;i++){
-   //Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
-   //Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
-   Ecattot(i) = 1000*sum(elem_prod(C(i),wt_fsh(i)));
-   Eecocon(i) = 1000*sum(elem_prod(Eec(i),wt_pop(i)));
+   Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
+   Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
    Ecatp(i) = (C(i)/sum(C(i)))*age_trans;
    Elenp(i) = Ecatp(i) * len_trans1;
    Eindxsurv1(i)= q1(i)*sum(elem_prod(elem_prod(elem_prod(N(i),mfexp(-yrfrct_srv1(i)*Z(i))),slctsrv1),wt_srv1(i)));
@@ -1088,14 +1087,12 @@ void model_parameters::Projections(void)
     Nsrv_proj(i,j)=N_proj(i,j)*mfexp(-yrfrct_srv6(endyr)*Z_proj(i,j));  
   }
   //  Total catches and biomass
-  //Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
-  Ecattot_proj(i) = 1000*sum(elem_prod(C_proj(i),wt_fsh_proj));
+  Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
   // 3+ biomass
   Esumbio_proj(i)= N_proj(i)(rcrage+2,trmage)*wt_pop_proj(rcrage+2,trmage);
   // Alternative: 2+ biomass
   //    Esumbio_proj(i)= N_proj(i)(rcrage+1,trmage)*wt_pop_proj(rcrage+1,trmage);
-  // Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
-  Exrate_proj(i)=Ecattot_proj(i)/(1000*Esumbio_proj(i));
+  Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
   Espawnbio_proj(i)= sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-0.21*Z_proj(i))),wt_spawn_proj),0.5*mat));
   //Summer acoustic
   //    Esrv_proj(i)= q6*sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-yrfrct_srv6(endyr)*Z_proj(i))),slctsrv6),wt_srv_proj));

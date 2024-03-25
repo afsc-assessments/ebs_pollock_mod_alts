@@ -326,8 +326,8 @@ PARAMETER_SECTION
  // Population parameters
   //  init_bounded_number M(0.1,0.5,-1)
   init_bounded_vector M(rcrage,trmage,0.1,5.0,-1)
-  init_bounded_number mean_log_initN(-15,15,1)
-  init_bounded_dev_vector dev_log_initN(rcrage+1,trmage,-15,15,2)
+  init_bounded_number mean_log_initN(-15,15,-1)
+  init_bounded_dev_vector dev_log_initN(rcrage+1,trmage,-15,15,-2)
   vector initN(rcrage+1,trmage)
   init_bounded_number mean_log_recruit(-15,15,1)
   init_bounded_dev_vector dev_log_recruit(styr,endyr,-15,15,3)
@@ -364,8 +364,8 @@ PARAMETER_SECTION
   init_bounded_dev_vector inf1_fsh_dev(styr,endyr,-5,5,7)
   //    init_bounded_dev_vector slp2_fsh_dev(styr,endyr,-5,5,6)
   //    init_bounded_dev_vector inf2_fsh_dev(styr,endyr,-5,5,6)
-  init_bounded_dev_vector slp2_fsh_dev(styr,endyr,-5,5,-1)
-  init_bounded_dev_vector inf2_fsh_dev(styr,endyr,-5,5,-1)
+  init_bounded_dev_vector slp2_fsh_dev(styr,endyr,-5,5,6)
+  init_bounded_dev_vector inf2_fsh_dev(styr,endyr,-5,5,7)
 
   vector slp1_fsh(styr,endyr)
   vector inf1_fsh(styr,endyr)
@@ -401,7 +401,7 @@ PARAMETER_SECTION
   init_bounded_dev_vector dev_log_F(styr,endyr,-10,10,2)
   vector F(styr,endyr)
   init_bounded_number log_q1_mean(-10,10,5)
-  init_bounded_dev_vector log_q1_dev(styr,endyr,-5,5,5) 
+  init_bounded_dev_vector log_q1_dev(styr,endyr,-5,5,-5) 
    //  init_bounded_number log_q2(-10,10,-1)
   init_bounded_number log_q2_mean(-10,10,5)
   init_bounded_dev_vector log_q2_dev(styr,endyr,-5,5,-1)  
@@ -647,8 +647,9 @@ FUNCTION Selectivity
    slctfsh(i)=slctfsh(i)/slctfsh(i,7);
  }
 
- M(1)=1.39; M(2)=0.69; M(3)=0.48; M(4)=0.37; M(5)=0.34;
- M(6)=0.30; M(7)=0.30; M(8)=0.29; M(9)=0.28; M(10)=0.29;
+ M(1)=0.9; M(2)=0.45; M(3)=0.3; M(4)=0.3; M(5)=0.3;
+ M(6)=0.30; M(7)=0.30; M(8)=0.30; M(9)=0.30; M(10)=0.30;
+ //0.9	0.45	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3	0.3
  for(int i=1; i<=10; i++) M(i)*=natMscalar;
 
 //Survey 1 selectivity
@@ -726,10 +727,8 @@ FUNCTION Catch_at_age
 
 FUNCTION Expected_values
  for (i=styr;i<=endyr;i++){
-   //Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
-   //Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
-   Ecattot(i) = 1000*sum(elem_prod(C(i),wt_fsh(i)));
-   Eecocon(i) = 1000*sum(elem_prod(Eec(i),wt_pop(i)));
+   Ecattot(i) = 1000000*sum(elem_prod(C(i),wt_fsh(i)));
+   Eecocon(i) = 1000000*sum(elem_prod(Eec(i),wt_pop(i)));
    Ecatp(i) = (C(i)/sum(C(i)))*age_trans;
    Elenp(i) = Ecatp(i) * len_trans1;
    Eindxsurv1(i)= q1(i)*sum(elem_prod(elem_prod(elem_prod(N(i),mfexp(-yrfrct_srv1(i)*Z(i))),slctsrv1),wt_srv1(i)));
@@ -904,14 +903,12 @@ FUNCTION Projections
     Nsrv_proj(i,j)=N_proj(i,j)*mfexp(-yrfrct_srv6(endyr)*Z_proj(i,j));  
   }
   //  Total catches and biomass
-  //Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
-  Ecattot_proj(i) = 1000*sum(elem_prod(C_proj(i),wt_fsh_proj));
+  Ecattot_proj(i) = 1000000*sum(elem_prod(C_proj(i),wt_fsh_proj));
   // 3+ biomass
   Esumbio_proj(i)= N_proj(i)(rcrage+2,trmage)*wt_pop_proj(rcrage+2,trmage);
   // Alternative: 2+ biomass
   //    Esumbio_proj(i)= N_proj(i)(rcrage+1,trmage)*wt_pop_proj(rcrage+1,trmage);
-  // Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
-  Exrate_proj(i)=Ecattot_proj(i)/(1000*Esumbio_proj(i));
+  Exrate_proj(i)=Ecattot_proj(i)/(1000000*Esumbio_proj(i));
   Espawnbio_proj(i)= sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-0.21*Z_proj(i))),wt_spawn_proj),0.5*mat));
   //Summer acoustic
   //    Esrv_proj(i)= q6*sum(elem_prod(elem_prod(elem_prod(N_proj(i),mfexp(-yrfrct_srv6(endyr)*Z_proj(i))),slctsrv6),wt_srv_proj));

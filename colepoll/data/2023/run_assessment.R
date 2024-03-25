@@ -5,6 +5,7 @@ library(GOApollock)
 library(TMB)
 
 input <- prepare_pk_input(path=getwd(), datfile='pk23_10.txt', version='2023 final')
+input <- prepare_pk_input(path=getwd(), datfile='gp.dat', version='2023 final')
 str(input$dat)
 str(input$par)
 
