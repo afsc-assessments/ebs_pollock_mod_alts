@@ -7,8 +7,11 @@ ebswp
 #nameStocks
 EBS_Pollock
 #selectivity_shar_matrix 
+1 1 1 1 1 1
 1 2 2 2 2 2 
 1 1 2 3 4 2
+#nregbyStock
+1
 #Sr_type 
 1
 #AgeError 
@@ -18,9 +21,13 @@ EBS_Pollock
 #recMatrix
 1
 #Steepness 
-0.7 0.1  -6
+0.7 
+0.1  
+-6
 #SigmaR 
-0.67 0.05 -4
+0.67 
+0.05 
+-4
 #phase_Rzero 
 4 
 #Nyrs_sr 
@@ -32,17 +39,27 @@ EBS_Pollock
 #GrowMatrix 
 1 
 #Linf
-74.4	0.1	-4																																									
+74.4	
+0.1	
+-4																																									
 #K
-0.16	0.1	-4																																									
+0.16	
+0.1	
+-4																																									
 #Lo_Len
-18	0.1	-4																																									
+18	
+0.1	
+-4																																									
 #Sigma_len
-0.09 0.1	-4																																									
+0.09 
+0.1	
+-4																																									
 #NMatrix
 1
 #Natural_Mortality 
-0.3 0.2 -4
+0.3 
+0.2 
+-4
 # npars_mage
 3
 # ages_M_changes
@@ -59,8 +76,6 @@ EBS_Pollock
 
 #Random_walk_M_sigmas blank if nyrs==0
 
-#qMatrix
-1
 #catchability 
 1 1 1 1 .1
 #catchability prior sigma
@@ -85,20 +100,20 @@ EBS_Pollock
 5 2 1 1  2
 #q_agemax 
 12 5 1 1 5
-#junk 
-0.05
+#use_vb_wt_age 
+0
 #n_proj_yrs 
-5
+20
 #Fsh_selopt_1 
 1
 #Fsh_nages_1 
-8
+9
 #Fsh_ph_1 
 3
 #Fsh_curvpen_1 
-0.9
+1
 #Fsh_domepen_1 
-0.9
+1
 #Fsh_sel_change_1 
 # nyrs fish selectivity changes
 58
@@ -123,11 +138,13 @@ EBS_Pollock
 #Ind_domePen
 0.1
 # nyrs fish selectivity changes
-0
+40
 # Yrs fish selectivity changes
-
+1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998
+1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
+2016 2017 2018 2019 2020 2021 2022
 # sigm fish selectivity changes
-
+0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 
 # Ages of selectivity change 
 0 0.1 0.5 0.8 1 1 1 1 1 1 1 1 1 1 1
 #ATS_selopt 
@@ -203,5 +220,9 @@ EBS_Pollock
 # Ages of selectivity change Fishery 2
 0 0.9 0.8 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7 0.7
 #Age_1_BTS_selopt 
+#pop_wtage																																																											
+0.084881666	0.195868126	0.3542318	0.47891	0.5902872	0.698033	0.8060948	0.9029996	0.9874292	1.0689416	1.1511662	1.2370584	1.3379166	1.4536958	1.5752528																																													
+#mat_age																																																											
+0 0.008 0.289 0.641 0.842 0.901 0.947 0.963 0.97 1 1 1 1 1 1                                        																																																											
 #Test
 123456789

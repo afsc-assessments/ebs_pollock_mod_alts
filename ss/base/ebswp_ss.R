@@ -21,7 +21,8 @@ getwd()
 library(r4ss)
 library(tidyverse)
 # get FMSY
-r1 <- SS_output(dir = '.'); #SS_plots(r1)
+r1 <- SS_output(dir = '.'); 
+SS_plots(r1)
 r2 <- SS_output(dir = '../selvary'); 
 r3 <- SS_output(dir = '../Hake_2023_Model_Files'); 
 mods <- SSgetoutput(dirvec = c(".", "../selvary") )

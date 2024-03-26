@@ -9,9 +9,15 @@ input <- prepare_pk_input(path=getwd(), datfile='gp.dat', version='2023 final')
 str(input$dat)
 str(input$par)
 
+fit_pk
 fit <- fit_pk(input)
 
 str(fit$opt)
 str(fit$rep)
 str(fit$sd)
 
+plot_data_overview(input)
+read_pk_rep("goa.rep")
+dat<-read_pk_dat("pk23_10.txt")
+dat<-read_pk_dat("gp.dat")
+data
