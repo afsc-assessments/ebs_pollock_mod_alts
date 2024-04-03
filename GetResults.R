@@ -110,6 +110,7 @@ gp_run<-gp_obj()
 
 #--Read in results from SAM run----
 load("SAM/poll23/baserun/model.RData")
+load("SAM/poll23/run/model2.RData")
 SAM_obj <- function(myfit=fit, yrmin=1964,yrmax=2024) {
   ssb <-  data.frame(stockassessment::ssbtable(myfit))
   ssb$Year<- as.numeric(row.names(ssb))
@@ -179,8 +180,10 @@ sam_run$<-SAM_obj()
 names(sam_run)
 pm_run$sel
 names(sam_run$sel)
-all_sel <- rbind(sam_run$sel,pm_run$sel,am_run$sel,ss_run$sel,gp_run$sel)
 dim(all_sel)
+all_sel <- rbind(sam_run$sel,pm_run$sel,am_run$sel,ss_run$sel,gp_run$sel)
+all_sel <- rbind(ss_run$sel,gp_run$sel)
+all_sel <- rbind(sam_run$sel,pm_run$sel,am_run$sel)
 Plot_Sel_age()
 Plot_Sel(lage=15)
 all_ts <- rbind(sam_run$ts,pm_run$ts,am_run$ts,ss_run$ts,gp_run$ts)

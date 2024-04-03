@@ -44,10 +44,11 @@ input1$recruit_model
 input1$map$logit_q 
 input1$map$logit_q <- as.factor(NA)
 m1 <- fit_wham(input1, do.retro=FALSE,do.osa = FALSE,MakeADFun.silent=TRUE) # turn off OSA residuals to save time
+names(m1$rep)
 
 # Check that m1 converged (m1$opt$convergence should be 0, and the maximum gradiet should be < 1e-06)
 check_convergence(m1)
-m1$sdrep
+m1$sdreport
 plot_wham_output(mod=m1, out.type='html')
 plot_wham_output(mod=m1, out.type='png')
 ?plot_wham_output(mod=m1, out.type='html')
@@ -63,8 +64,10 @@ input2 <- prepare_wham_input(asap3, recruit_model=2, model_name="EBSwp state-spa
                                         ), 
                                     fix_pars=list(5:7,c(2,5:6))),
 	                            NAA_re = list(sigma="rec+1", cor="iid"))
-m2 <- fit_wham(input2, do.retro=F,do.osa = F) # turn off OSA residuals to save time
-plot_wham_output(mod=m2, out.type='html')
+m2 <- fit_wham(input2, do.retro=F,do.osa = F,MakeADFun.silent = TRUE) # turn off OSA residuals to save time
+plot_wham_output(mod=m2)
+#, out.type='html',ylim=c(0,0.5))
+wham_html()
 
 sel_model <- c(rep("logistic",5), rep("age-specific",4))
 
