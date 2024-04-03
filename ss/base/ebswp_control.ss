@@ -11,6 +11,7 @@
 1  #_N_Growth_Patterns (Growth Patterns, Morphs, Bio Patterns, GP are terms used interchangeably in SS3)
 1 #_N_platoons_Within_GrowthPattern 
 #_Cond 1 #_Platoon_within/between_stdev_ratio (no read if N_platoons=1)
+#_Cond sd_ratio_rd < 0: platoon_sd_ratio parameter required after movement params.
 #_Cond  1 #vector_platoon_dist_(-1_in_first_val_gives_normal_approx)
 #
 2 # recr_dist_method for parameters:  2=main effects for GP, Area, Settle timing; 3=each Settle entity; 4=none (only when N_GP*Nsettle*pop==1)
@@ -62,7 +63,8 @@
 5 #_maturity_option:  1=length logistic; 2=age logistic; 3=read age-maturity matrix by growth_pattern; 4=read age-fecundity; 5=disabled; 6=read length-maturity
 #_Age_Fecundity by growth pattern from wt-at-age.ss now invoked by read bodywt flag
 2 #_First_Mature_Age
-1 #_fecundity option:(1)eggs=Wt*(a+b*Wt);(2)eggs=a*L^b;(3)eggs=a*Wt^b; (4)eggs=a+b*L; (5)eggs=a+b*W
+# NOTE: maturity options 4 and 5 cause fecundity_at_length to be ignored, but parameters still needed 
+1 #_fecundity_at_length option:(1)eggs=Wt*(a+b*Wt);(2)eggs=a*L^b;(3)eggs=a*Wt^b; (4)eggs=a+b*L; (5)eggs=a+b*W
 0 #_hermaphroditism option:  0=none; 1=female-to-male age-specific fxn; -1=male-to-female age-specific fxn
 1 #_parameter_offset_approach for M, G, CV_G:  1- direct, no offset**; 2- male=fem_parm*exp(male_parm); 3: male=female*exp(parm) then old=young*exp(parm)
 #_** in option 1, any male parameter with value = 0.0 and phase <0 is set equal to female parameter
@@ -70,7 +72,6 @@
 #_growth_parms
 #_ LO HI INIT PRIOR PR_SD PR_type PHASE env_var&link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
 # Sex: 1  BioPattern: 1  NatMort
-# 0.05 0.6 0.275552 -1.2 0.1 3 4 0 0 0 0 0 0 0 # NatM_uniform_Fem_GP_1
 # Sex: 1  BioPattern: 1  Growth
  2 15 5 32 99 0 -5 0 0 0 0 0 0 0 # L_at_Amin_Fem_GP_1
  45 60 53.2 50 99 0 -3 0 0 0 0 0 0 0 # L_at_Amax_Fem_GP_1
@@ -86,7 +87,7 @@
  -3 3 1 1 99 0 -50 0 0 0 0 0 0 0 # Eggs/kg_inter_Fem_GP_1
  -3 3 0 0 99 0 -50 0 0 0 0 0 0 0 # Eggs/kg_slope_wt_Fem_GP_1
 # Hermaphroditism
-#  Recruitment Distribution  
+#  Recruitment Distribution 
  0 2 1 1 99 0 -50 0 0 0 0 0 0 0 # RecrDist_GP_1
  0 2 1 1 99 0 -50 0 0 0 0 0 0 0 # RecrDist_Area_1
  0 2 1 1 99 0 -50 0 0 0 0 0 0 0 # RecrDist_month_1
@@ -112,7 +113,7 @@
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn #  parm_name
             8            17       14.0963            12            99             0          1          0          0          0          0          0          0          0 # SR_LN(R0)
            0.2             1      0.820323         0.777         0.113             2          4          0          0          0          0          0          0          0 # SR_BH_steep
-             1           1.6           1.4           1.1            99             0         -6          0          0          0          0          0          0          0 # SR_sigmaR
+             .1           1.6           0.7           1.1            99             0         -6          0          0          0          0          0          0          0 # SR_sigmaR
             -5             5             0             0            99             0        -50          0          0          0          0          0          0          0 # SR_regime
              0             2             0             1            99             0        -50          0          0          0          0          0          0          0 # SR_autocorr
 #_no timevary SR parameters
@@ -233,18 +234,18 @@
 # 3   bottom_Survey LenSelex
 # 1   Fishery AgeSelex
          -1002             3         -1000            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P1_Fishery(1)
-            -1             1             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P2_Fishery(1)
-            -5             9       2.24478            -1          0.01             0          2          0          2       1991       2018          5          0          0  #  AgeSel_P3_Fishery(1)
-            -5             9       1.83032            -1          0.01             0          2          0          2       1991       2018          5          0          0  #  AgeSel_P4_Fishery(1)
-            -5             9      0.353077            -1          0.01             0          2          0          2       1991       2018          5          0          0  #  AgeSel_P5_Fishery(1)
-            -5             9       0.52205            -1          0.01             0          2          0          2       1991       2018          5          0          0  #  AgeSel_P6_Fishery(1)
-            -5             9      0.241826            -1          0.01             0          2          0          2       1991       2018          5          0          0  #  AgeSel_P7_Fishery(1)
-            -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P8_Fishery(1)
-            -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P9_Fishery(1)
-            -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P10_Fishery(1)
-            -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P11_Fishery(1)
-            -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P12_Fishery(1)
-            -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P13_Fishery(1)
+            -5             9          2.22            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P2_Fishery(1)
+            -5             9       2.24478            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P3_Fishery(1)
+            -5             9       1.83032            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P4_Fishery(1)
+            -5             9      0.353077            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P5_Fishery(1)
+            -5             9       0.52205            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P6_Fishery(1)
+            -5             9      0.241826            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P7_Fishery(1)
+            -5             9             0            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P8_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P9_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P10_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P11_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P12_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P13_Fishery(1)
             -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P14_Fishery(1)
             -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P15_Fishery(1)
             -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P21_Fishery(1)
@@ -289,16 +290,33 @@
             -5            20     -0.570902             0            99             0          2          0          0          0          0          0          0          0  #  ln(DM_theta)_3
 # timevary selex parameters 
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type    PHASE  #  parm_name
-        0.0001             2           1.4           0.5           0.5            -1      -5  # AgeSel_P3_Fishery(1)_dev_se
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P2_Fishery(1)_dev_se
+         -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P2_Fishery(1)_dev_autocorr
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P3_Fishery(1)_dev_se
          -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P3_Fishery(1)_dev_autocorr
-        0.0001             2           1.4           0.5           0.5            -1      -5  # AgeSel_P4_Fishery(1)_dev_se
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P4_Fishery(1)_dev_se
          -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P4_Fishery(1)_dev_autocorr
-        0.0001             2           1.4           0.5           0.5            -1      -5  # AgeSel_P5_Fishery(1)_dev_se
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P5_Fishery(1)_dev_se
          -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P5_Fishery(1)_dev_autocorr
-        0.0001             2           1.4           0.5           0.5            -1      -5  # AgeSel_P6_Fishery(1)_dev_se
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P6_Fishery(1)_dev_se
          -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P6_Fishery(1)_dev_autocorr
-        0.0001             2           1.4           0.5           0.5            -1      -5  # AgeSel_P7_Fishery(1)_dev_se
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P7_Fishery(1)_dev_se
          -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P7_Fishery(1)_dev_autocorr
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P8_Fishery(1)_dev_se
+         -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P8_Fishery(1)_dev_autocorr
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P9_Fishery(1)_dev_se
+         -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P9_Fishery(1)_dev_autocorr
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P10_Fishery(1)_dev_se
+         -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P10_Fishery(1)_dev_autocorr
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P11_Fishery(1)_dev_se
+         -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P11_Fishery(1)_dev_autocorr
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P12_Fishery(1)_dev_se
+         -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P12_Fishery(1)_dev_autocorr
+        0.0001             2           0.7           0.5           0.5            -1      -5  # AgeSel_P13_Fishery(1)_dev_se
+         -0.99          0.99             0             0           0.5            -1      -6  # AgeSel_P13_Fishery(1)_dev_autocorr
+# info on dev vectors created for selex parms are reported with other devs after tag parameter section 
+# info on dev vectors created for selex parms are reported with other devs after tag parameter section 
+# info on dev vectors created for selex parms are reported with other devs after tag parameter section 
 # info on dev vectors created for selex parms are reported with other devs after tag parameter section 
 #
 0   #  use 2D_AR1 selectivity(0/1)
