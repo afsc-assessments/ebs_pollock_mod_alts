@@ -20,9 +20,57 @@ devtools::install_github("r4ss/r4ss",
 getwd()
 library(r4ss)
 library(tidyverse)
+library(ggridges)
 # get FMSY
 r1 <- SS_output(dir = '.'); 
-SS_plots(r1)
+#SS_plots(r1)
+r1$natage
+r1$SS_output
+(unique(c(r1$ageselex$Fleet,r1$ageselex$Factor) ))
+(unique(c(r1$ageselex$Factor,r1$ageselex$Fleet) ))
+
+((r1$ageselex) ) |> filter(Fleet==2,Factor=="Asel")
+names(r1$sprseries)
+
+r1$ageselex[,c(3,9:23)] 
+glimpse(r1$sprseries)
+glimpse(r1$likelihoods_used)
+glimpse(r1$likelihoods_by_fleet)
+names(ss_run)
+ss_run$sel
+nages = 15
+fage=1;lage=15
+sdf       <-  pivot_longer(sel_ss,names_to="age",values_to="sel",cols=2:(nages+1)) %>% filter(Year>=1991,Year<2024) %>% mutate(age=as.numeric(age)) #+ arrange(age,yr)
+p1  <- sdf |> ggplot(aes(x=age,y=as.factor(Year),height = sel)) + 
+  geom_density_ridges(stat = "identity",scale = 2.8, 
+                      alpha = .3, fill="goldenrod",color="tan") + 
+  ggthemes::theme_few() + ylab("Year") + xlab("Age (years)") +
+  scale_x_continuous(limits=c(fage,lage),breaks=fage:lage) +
+  scale_y_discrete(limits=rev(levels(as.factor(sdf$Year))));p1
+
+plot_sel <- function(Year=M$Yr,sel=M$sel_fsh, styr=1977, fage=NULL, lage=NULL, alpha=0.2,scale=3.8,fill="purple")
+{
+  df        <- data.frame(Year=Year,sel=sel );
+  if (is.null(fage)) fage      <- 1
+  if (is.null(lage)) lage      <- length(sel[1,])
+  df <- df |> select(1:(lage-fage+2))
+  names(df) <- c("Year",fage:lage)
+  nages     <- length(fage:lage)
+  names(df)
+  sdf       <-  pivot_longer(df,names_to="age",values_to="sel",cols=2:(nages+1)) %>% filter(Year>=styr) %>% mutate(age=as.numeric(age)) #+ arrange(age,yr)
+  p1  <- ggplot(sdf,aes(x=age,y=as.factor(Year),height = sel)) + geom_density_ridges(stat = "identity",scale = scale, alpha = alpha,
+                                                                                     fill=fill,color="black") + ggthemes::theme_few() +
+    ylab("Year") + xlab("Age (years)") +
+    scale_x_continuous(limits=c(fage,lage),breaks=fage:lage) +
+    scale_y_discrete(limits=rev(levels(as.factor(sdf$Year))))
+  return(p1)
+}
+M<- 
+
+
+
+
+
 r2 <- SS_output(dir = '../selvary'); 
 r3 <- SS_output(dir = '../Hake_2023_Model_Files'); 
 mods <- SSgetoutput(dirvec = c(".", "../selvary") )
