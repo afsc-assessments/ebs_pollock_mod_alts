@@ -1,0 +1,129 @@
+---
+title: "EBS pollock models"
+author: "Ianelli"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+    vertical_layout: fill
+    theme: 
+      version: 4
+      bootswatch: minty
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(plotly)
+source("GetResults.R")
+r1 <- ss_run<-SS_obj()
+ra <- SS_obj(SS_output(dir = here("ss","noramp"),verbose=FALSE),src="noramp") 
+r2 <- SS_obj(SS_output(dir = here("ss","mod")),src="mod")  
+r3 <- SS_obj(SS_output(dir = here("ss","mix")),src="mix")  
+r4 <- SS_obj(SS_output(dir = here("ss","high")),src="high")  
+#r5 <- SS_obj(SS_output(dir = here("ss","autocor")),src="autocor")  
+ss_sel <- rbind(r1$sel,r2$sel,r3$sel,r4$sel)#,r5$sel)
+(r1$sel)
+myl<-list(c(r1,r2,r3,r4))
+#Q: use lapply to apply function to all in my list of models 
+fun <- function(x) {
+  sel <- x$sel
+  compute_matrix_summary(sel[,2:16])
+}
+
+gp_run<-gp_obj()
+am_run<-AMAK_obj()
+pm_run<-pm_obj()
+load(here("SAM","poll23","run","model2.RData"))
+sam_run <- SAM_obj()
+all_sel <- rbind(sam_run$sel,pm_run$sel,am_run$sel,ss_run$sel,gp_run$sel)
+all_ts <- rbind( sam_run$ts,pm_run$ts,am_run$ts,ss_run$ts,gp_run$ts)
+```
+
+Platforms
+=======================================================================
+
+Column {.tabset}
+-----------------------------------------------------------------------
+
+### Selectivity
+
+```{r}
+p<-Plot_Sel() + ggthemes::theme_few(base_size=11)
+p
+
+```
+
+
+### Selectivity by age
+
+```{r}
+p <- Plot_Sel_age()
+ggplotly(p)
+```
+
+### SSB
+
+```{r}
+
+p<- Plot_SSB()
+ggplotly(p)
+
+```
+
+### Stock recruitment relationship
+
+```{r}
+
+p<- Plot_SRR()
+ggplotly(p)
+
+```
+
+SS runs
+=======================================================================
+
+Column {.tabset}
+-----------------------------------------------------------------------
+### Selectivity
+```{r echo=FALSE}
+ss_sel <- rbind(r1$sel,r2$sel,r3$sel,r4$sel)#,r5$sel)
+p1 <- Plot_Sel(ss_sel)
+p1
+```
+
+
+### Selectivity at age
+```{r echo=FALSE}
+p1  <- Plot_Sel_age(ss_sel)
+ggplotly(p1)
+```
+
+### SSB and recruitment
+
+```{r echo=FALSE}
+ss_ts  <- rbind(r1$ts,r2$ts,r3$ts,r4$ts)#,r5$sel)
+p1 <- Plot_SSB(ss_ts)
+ggplotly(p1)
+```
+
+
+With and w/o ramp
+=======================================================================
+
+
+### SSB and recruitment
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Get results w/ and w/o  ramp
+df <- rbind(r1$ts,ra$ts)
+  p1  <- df |> filter(Year<2024,Year>1953) |> ggplot(aes( x=Year, y= value,color=source)) + 
+    geom_line(stat='identity') + geom_point(stat='identity') +
+    ggthemes::theme_few() + ylab("SSB") + xlab("Year") +
+    ylim(0,NA) + facet_grid(type~.,scales="free_y")  
+  ggplotly(p1)
+  
+```
+
