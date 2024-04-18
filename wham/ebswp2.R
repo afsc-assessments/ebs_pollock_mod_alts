@@ -1,21 +1,25 @@
 # load wham
 library(wham)
+library(here)
 
 # create directory for analysis, E.g.,
-write.dir <- "."
+setwd(here())
+write.dir <- "wham"
 if(!exists("write.dir")) write.dir = getwd()
 if(!dir.exists(write.dir)) dir.create(write.dir)
 setwd(write.dir)
-
+getwd()
 # copy asap3 data file to working directory
 wham.dir <- find.package("wham")
 # file.copy(from=file.path(wham.dir,"extdata","ex1_SNEMAYT.dat"), to=write.dir, overwrite=FALSE)
 
 # confirm you are in the working directory and it has the ASAP_SNEMAYT.dat file
 list.files()
+getwd()
 
 # read asap3 data file and convert to input list for wham
 asap3 <- read_asap3_dat("ebswp.dat")
+asap3 <- read_asap3_dat("ebswp23.dat")
 
 # ---------------------------------------------------------------
 # model 1
@@ -31,11 +35,11 @@ input1 <- prepare_wham_input(asap3)
 input1 <- prepare_wham_input(asap3, recruit_model=2, model_name="EBS pollock example",
 	         selectivity=list(model=rep("age-specific",2), 
                                 	re=rep("none",2),  initial_pars=list(
-                                		c(0.01,0.5,0.5,0.5,1.0,1.0,0.96,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5),
+                                		c(0.01,0.5,0.5,0.5,1.0,1.0,0.96,0.95,0.95,0.95,0.95,0.95,0.95,0.95,0.95),
                                 		c(0.5,0.05,0.3,0.5,1.0,1.0,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5)  ), 
-                                	fix_pars=list(c(1:15),c(1:15))),
-                                	catchability=list(initial_q=1),
-	                            NAA_re = list(sigma="rec", cor="iid"
+                                	fix_pars=list(c(1:15),c(1:15)),
+                                	catchability=list(initial_q=1)#,
+	                            #NAA_re = list(sigma="rec", cor="iid"
 	                                          ))
 # For fixed effects: 
 input1$random <-  NULL
@@ -65,9 +69,10 @@ input2 <- prepare_wham_input(asap3, recruit_model=2, model_name="EBSwp state-spa
                                     fix_pars=list(5:7,c(2,5:6))),
 	                            NAA_re = list(sigma="rec+1", cor="iid"))
 m2 <- fit_wham(input2, do.retro=F,do.osa = F,MakeADFun.silent = TRUE) # turn off OSA residuals to save time
+check_convergence(m2)
 plot_wham_output(mod=m2)
 #, out.type='html',ylim=c(0,0.5))
-wham_html()
+wham_html(m2)
 
 sel_model <- c(rep("logistic",5), rep("age-specific",4))
 

@@ -119,18 +119,23 @@
 #_no timevary SR parameters
 1 #do_recdev:  0=none; 1=devvector (R=F(SSB)+dev); 2=deviations (R=F(SSB)+dev); 3=deviations (R=R0*dev; dev2=R-f(SSB)); 4=like 3 with sum(dev2) adding penalty
 1970 # first year of main recr_devs; early devs can preceed this era
-2022 # last year of main recr_devs; forecast devs start in following year
+2023 # last year of main recr_devs; forecast devs start in following year
 1 #_recdev phase 
 1 # (0/1) to read 13 advanced options
  1949 #_recdev_early_start (0=none; neg value makes relative to recdev_start)
  3 #_recdev_early_phase
  5 #_forecast_recruitment phase (incl. late recr) (0 value resets to maxphase+1)
  1 #_lambda for Fcast_recr_like occurring before endyr+1
- 1965 #_last_yr_nobias_adj_in_MPD; begin of ramp
- 1971 #_first_yr_fullbias_adj_in_MPD; begin of plateau
- 2019 #_last_yr_fullbias_adj_in_MPD
- 2021 #_end_yr_for_ramp_in_MPD (can be in forecast to shape ramp, but SS3 sets bias_adj to 0.0 for fcast yrs)
- -1 #_max_bias_adj_in_MPD (typical ~0.8; -3 sets all years to 0.0; -2 sets all non-forecast yrs w/ estimated recdevs to 1.0; -1 sets biasadj=1.0 for all yrs w/ recdevs)
+1951.3   #_last_early_yr_nobias_adj_in_MPD 
+1984.0   #_first_yr_fullbias_adj_in_MPD 
+2018.6   #_last_yr_fullbias_adj_in_MPD 
+2021.4   #_first_recent_yr_nobias_adj_in_MPD 
+0.8588  #_max_bias_adj_in_MPD (1.0 to mimic pre-2009 models) 
+ #1965 #_last_yr_nobias_adj_in_MPD; begin of ramp
+ #1971 #_first_yr_fullbias_adj_in_MPD; begin of plateau
+ #2019 #_last_yr_fullbias_adj_in_MPD
+ #2021 #_end_yr_for_ramp_in_MPD (can be in forecast to shape ramp, but SS3 sets bias_adj to 0.0 for fcast yrs)
+ #-1 #_max_bias_adj_in_MPD (typical ~0.8; -3 sets all years to 0.0; -2 sets all non-forecast yrs w/ estimated recdevs to 1.0; -1 sets biasadj=1.0 for all yrs w/ recdevs)
  0 #_period of cycles in recruitment (N parms read below)
  -6 #min rec_dev
  6 #max rec_dev
@@ -234,18 +239,18 @@
 # 3   bottom_Survey LenSelex
 # 1   Fishery AgeSelex
          -1002             3         -1000            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P1_Fishery(1)
-            -5             9          2.22            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P2_Fishery(1)
-            -5             9       2.24478            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P3_Fishery(1)
-            -5             9       1.83032            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P4_Fishery(1)
-            -5             9      0.353077            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P5_Fishery(1)
-            -5             9       0.52205            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P6_Fishery(1)
-            -5             9      0.241826            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P7_Fishery(1)
-            -5             9             0            -1          0.01             0          2          0          2       1964       2022          5          0          0  #  AgeSel_P8_Fishery(1)
-            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P9_Fishery(1)
-            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P10_Fishery(1)
-            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P11_Fishery(1)
-            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P12_Fishery(1)
-            -5             9             0            -1          0.01             0          3          0          2       1964       2022          5          0          0  #  AgeSel_P13_Fishery(1)
+            -5             9          2.22            -1          0.01             0          2          0          2       1964       2023          5          0          0  #  AgeSel_P2_Fishery(1)
+            -5             9       2.24478            -1          0.01             0          2          0          2       1964       2023          5          0          0  #  AgeSel_P3_Fishery(1)
+            -5             9       1.83032            -1          0.01             0          2          0          2       1964       2023          5          0          0  #  AgeSel_P4_Fishery(1)
+            -5             9      0.353077            -1          0.01             0          2          0          2       1964       2023          5          0          0  #  AgeSel_P5_Fishery(1)
+            -5             9       0.52205            -1          0.01             0          2          0          2       1964       2023          5          0          0  #  AgeSel_P6_Fishery(1)
+            -5             9      0.241826            -1          0.01             0          2          0          2       1964       2023          5          0          0  #  AgeSel_P7_Fishery(1)
+            -5             9             0            -1          0.01             0          2          0          2       1964       2023          5          0          0  #  AgeSel_P8_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2023          5          0          0  #  AgeSel_P9_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2023          5          0          0  #  AgeSel_P10_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2023          5          0          0  #  AgeSel_P11_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2023          5          0          0  #  AgeSel_P12_Fishery(1)
+            -5             9             0            -1          0.01             0          3          0          2       1964       2023          5          0          0  #  AgeSel_P13_Fishery(1)
             -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P14_Fishery(1)
             -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P15_Fishery(1)
             -5             9             0            -1          0.01             0         -2          0          0          0          0          0          0          0  #  AgeSel_P21_Fishery(1)

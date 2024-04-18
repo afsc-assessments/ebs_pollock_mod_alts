@@ -3117,8 +3117,12 @@ FUNCTION Sel_Like
         if (i>1)
         {
           // This part is the penalty on the change itself--------------
-          dvariable var_tmp = square(sel_sigma_fsh(k,i));
-          sel_like_fsh(k,2)    += .5*norm2( log_sel_fsh(k,iyr-1) - log_sel_fsh(k,iyr) ) / var_tmp ;
+          dvariable sd_tmp = sel_sigma_fsh(k,i);
+          dvariable var_tmp = square(sd_tmp);
+          dvar_vector chi_tmp = ( log_sel_fsh(k,iyr-1) - log_sel_fsh(k,iyr) ) ;
+          // sel_like_fsh(k,2)    += .5*norm2( log_sel_fsh(k,iyr-1) - log_sel_fsh(k,iyr) ) / var_tmp ;
+          sel_like_fsh(k,2)    += dnorm( chi_tmp, 0., sd_tmp ) ;
+                     // loglik(24) -= dnorm(log_slp2_srv6, 0,2, true);
         }
         int nagestmp = nselages_fsh(k);
         for (j=seldecage;j<=nagestmp;j++)

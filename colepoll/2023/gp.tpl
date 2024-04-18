@@ -644,7 +644,11 @@ FUNCTION Selectivity
        (1-1/(1+mfexp(-(slp2_fsh(i))*(double(j)-(inf2_fsh(i))))));
    }
  // The plan would be to check and adjust the max selected age as needed
-   slctfsh(i)=slctfsh(i)/slctfsh(i,7);
+ //if (i<1974)
+   //slctfsh(i)=slctfsh(i)/slctfsh(i,3);
+ //else
+   //slctfsh(i)=slctfsh(i)/slctfsh(i,7);
+   //slctfsh(i)=slctfsh(i)/mean(slctfsh(i)(4,8));
  }
 
  M(1)=0.9; M(2)=0.45; M(3)=0.3; M(4)=0.3; M(5)=0.3;
@@ -683,11 +687,11 @@ FUNCTION Selectivity
   // Calculate uncertainty in logit space where it makes more
   // sense. But it does break when selex=0 or 1 identically so
   // need to be careful there.
-  slctsrv1_logit=-log(1/(slctsrv1-1e-10)-1);
-  slctsrv2_logit=-log(1/(slctsrv2-1e-10)-1);
-  slctsrv3_logit=-log(1/(slctsrv3-1e-10)-1);
-  slctsrv6_logit=-log(1/(slctsrv6-1e-10)-1);
-  slctfsh_logit=-log(1/(slctfsh(endyr-1)-1e-10)-1);
+  slctsrv1_logit = -log(1/(slctsrv1-1e-10)-1);
+  slctsrv2_logit = -log(1/(slctsrv2-1e-10)-1);
+  slctsrv3_logit = -log(1/(slctsrv3-1e-10)-1);
+  slctsrv6_logit = -log(1/(slctsrv6-1e-10)-1);
+  slctfsh_logit  = -log(1/(slctfsh(endyr-1)-1e-10)-1);
 
 
 FUNCTION Mortality
