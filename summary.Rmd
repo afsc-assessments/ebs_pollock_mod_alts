@@ -17,29 +17,34 @@ editor_options:
 ```{r setup, include=FALSE}
 library(flexdashboard)
 library(plotly)
-source("GetResults.R")
-r1 <- ss_run<-SS_obj()
-ra <- SS_obj(SS_output(dir = here("ss","noramp"),verbose=FALSE),src="noramp") 
-r2 <- SS_obj(SS_output(dir = here("ss","mod")),src="mod")  
-r3 <- SS_obj(SS_output(dir = here("ss","mix")),src="mix")  
-r4 <- SS_obj(SS_output(dir = here("ss","high")),src="high")  
-#r5 <- SS_obj(SS_output(dir = here("ss","autocor")),src="autocor")  
-ss_sel <- rbind(r1$sel,r2$sel,r3$sel,r4$sel)#,r5$sel)
-(r1$sel)
-myl<-list(c(r1,r2,r3,r4))
-#Q: use lapply to apply function to all in my list of models 
-fun <- function(x) {
-  sel <- x$sel
-  compute_matrix_summary(sel[,2:16])
+library(r4ss)
+library(tidyverse)
+library(here)
+library(ggridges)
+
+getwd()
+loadup<-FALSE
+if (loadup){
+  source("GetResults.R")
+  r1 <- ss_run<-SS_obj()
+  ra <- SS_obj(SS_output(dir = here("ss","noramp"),verbose=FALSE),src="noramp") 
+  r2 <- SS_obj(SS_output(dir = here("ss","mod")),src="mod")  
+  r3 <- SS_obj(SS_output(dir = here("ss","mix")),src="mix")  
+  r4 <- SS_obj(SS_output(dir = here("ss","high")),src="high")  
+  #r5 <- SS_obj(SS_output(dir = here("ss","autocor")),src="autocor")  
+  ss_sel <- rbind(r1$sel,r2$sel,r3$sel,r4$sel)#,r5$sel)
+  #compute_matrix_summary(sel[,2:16])
+  gp_run<-gp_obj()
+  am_run<-AMAK_obj()
+  pm_run<-pm_obj()
+  load(here("SAM","poll23","run","model2.RData"))
+  sam_run <- SAM_obj()
+  all_sel <- rbind(sam_run$sel,pm_run$sel,am_run$sel,ss_run$sel,gp_run$sel)
+  all_ts <- rbind( sam_run$ts,pm_run$ts,am_run$ts,ss_run$ts,gp_run$ts)
+} else {
+  load(here("compares.Rdata"))
 }
 
-gp_run<-gp_obj()
-am_run<-AMAK_obj()
-pm_run<-pm_obj()
-load(here("SAM","poll23","run","model2.RData"))
-sam_run <- SAM_obj()
-all_sel <- rbind(sam_run$sel,pm_run$sel,am_run$sel,ss_run$sel,gp_run$sel)
-all_ts <- rbind( sam_run$ts,pm_run$ts,am_run$ts,ss_run$ts,gp_run$ts)
 ```
 
 Platforms
@@ -87,7 +92,16 @@ SS runs
 
 Column {.tabset}
 -----------------------------------------------------------------------
+### Run description
+
+Runs with different selectivity assumptions where:     
+  - **base**: selectivity at age allowed to vary (sigma penalty=0.7)     
+  - **high**: selectivity at age constrained (sigma penalty=0.05)     
+  - **mod**: selectivity at age moderately constrained (sigma penalty=0.4)     
+  - **mix**: selectivity at age moderately constrained for middle ages, high for older ages, loose for younger ages      
+
 ### Selectivity
+
 ```{r echo=FALSE}
 ss_sel <- rbind(r1$sel,r2$sel,r3$sel,r4$sel)#,r5$sel)
 p1 <- Plot_Sel(ss_sel)

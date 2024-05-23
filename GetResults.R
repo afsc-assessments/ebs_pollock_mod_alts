@@ -1,9 +1,5 @@
-library(r4ss)
-library(tidyverse)
-library(ggridges)
-library(GOApollock)
 library(ebswp)
-library(here)
+library(GOApollock)
 #---Main pollock model run-----
 here( here())
 setwd(here("pm"))
@@ -35,6 +31,7 @@ pm_obj <- function(pm_run=pm1, yrmin=1964,yrmax=2024) {
 )
 return(list(sel=sel_pm,ts=ts))
 }
+setwd(here())
 #pm_run<-pm_obj()
 #glimpse(pm_run)
 
