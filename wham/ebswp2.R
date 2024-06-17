@@ -1,5 +1,7 @@
 # load wham
 library(wham)
+remotes::install_github(repo = 'GiancarloMCorrea/wham', ref='growth', INSTALL_opts = c("--no-docs", "--no-multiarch", "--no-demo"))
+?wham
 library(here)
 
 # create directory for analysis, E.g.,
@@ -20,6 +22,7 @@ getwd()
 # read asap3 data file and convert to input list for wham
 asap3 <- read_asap3_dat("ebswp.dat")
 asap3 <- read_asap3_dat("ebswp23.dat")
+?read_
 
 # ---------------------------------------------------------------
 # model 1
