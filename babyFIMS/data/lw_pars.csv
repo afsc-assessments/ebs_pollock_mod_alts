@@ -1,0 +1,2 @@
+stock,model,file,data,alpha,beta
+bsai-atka-mackerel,"log(w)~log(l), median bias-corrected",atka_mackerel/2024/R/schnute_growth_sd.R,1991-2022,0.006333213142517572,3.1876393324914654

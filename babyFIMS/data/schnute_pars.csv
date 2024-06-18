@@ -1,0 +1,2 @@
+stock,model,laamodel,sdmodel,file,data,log_len_amin,log_len_amax,log_kappa,sd_intercept,sd_slope
+bsai-atka-mackerel,Schnute_vonB(SchnuteFournier1980),laa~len_amin+(len_amax-len_amin)*(1-exp(-kappa*(age-amin)))/(1-exp(-kappa*(amax-amin))),sd=sd_intercept+sd_slope*log(obs_ages),atka_mackerel/2024/R/schnute_growth_sd.R,1991-2022,2.964273835295501,3.859284120977172,-2.14972891337665,2.4781782636558423,0.40640600573627184
