@@ -1,17 +1,31 @@
 library(RTMB)
 library(dplyr) 
+library(readr) 
 library(tidyr)
 library(ggplot2)
 
-load("data/am2022.RData")
+#load("data/am2022.RData")
+pm23<-readRDS("data/pm23.rds")
+View(pm23)
+input <- list()
+input$stock_info <- "ebs-pollock-2023"
+input$years <- pm23$Yr
+input$ages <- 1:15
+input$sp_frac  <- .25
+input$srv_frac <- .542
+input$waa  <- pm23$wt_cur
+pm23$Age
+View(input)
 load("data/sizeage_matrix.RData")
+sizeage <- read_csv("data/sizeage_matrix.csv")
+df <- read_csv("dfebswp.csv")
+View(df) 
 input$sizeage <- sizeage; rm(sizeage)
 source("R/helper.R")
-
-head(input$obsdf, 5) # long format with all observations
+input$sigr <- 0.6
+input$obsdf <- df
+tail(input$obsdf, 5) # long format with all observations
 # obs_type # 0=catch, 1=index, 2=agecom, 3=lencomp
-# nll_type # 0=dnorm, 1=dmultinom
-# fit_data # 1/0=TRUE/FALSE
 # fleet    # 1=fishery, 2=survey
 # obs      # transformed appropriately for nll_type (becomes keep vec)
 # obserror # if nll_type obs error is an input (note this is Neff for dmultinom)
@@ -29,11 +43,14 @@ dat$year <- input$years
 dat$minYear <- min(dat$year)
 dat$age <-  input$ages
 dat$len <-  input$lens
+dat$len <-  10:50
 dat$minAge <- min(dat$age)
 dat$sampleTimes <- input$srv_frac
 dat$spawnTimes <- input$sp_frac
+dat$spawnTimes <- 0.3
 dat$waa <- input$waa
 dat$mature <- input$maturity
+dat$mature <- c(0,0,.2,.6,.85,1,1,1,1,1,1,1,1,1,1)
 dat$sizeage <- input$sizeage
 dat$fleetTypes <- unique(input$obsdf$fleet) 
 dat$srmode <- 0 #
@@ -48,6 +65,7 @@ par$logsigR <- log(input$sigr)
 par$logsigN <- if(dat$logN_mode==2){log(0.5)}else{numeric(0)}
 par$logQ <- 0
 # is M a constant in FIMS or by year/age?
+input$natmort <- c(1., 0.6, 0.45, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3)
 par$logM <- matrix(log(input$natmort), nrow=length(dat$year), ncol=length(dat$age))
 par$rickerpar <- if(dat$srmode==1){c(1,1)}else{numeric(0)}
 par$bhpar <- if(dat$srmode==2){c(1,1)}else{numeric(0)}
@@ -55,11 +73,27 @@ par$logN <- matrix(10, nrow=length(dat$year), ncol=length(dat$age)) # Tim sugges
 par$logFmort <- matrix(0, nrow=length(dat$year), ncol=1)
 par$logfshslx <- log(input$fsh_slx) # need parametric selectivity
 par$logsrvslx <- log(input$srv_slx)
+# from the FIMS code
+par <- list()
+par$logsigR <- log(input$sigr)
+par$logsigN <- if(dat$logN_mode==2){log(0.5)}else{numeric(0)}
+par$logQ <- 0
+# is M a constant in FIMS or by year/age?
+par$logM <- matrix(log(input$natmort), nrow=length(dat$year), ncol=length(dat$age))
+par$rickerpar <- if(dat$srmode==1){c(1,1)}else{numeric(0)}
+par$bhpar <- if(dat$srmode==2){c(1,1)}else{numeric(0)}
+par$logN <- matrix(10, nrow=length(dat$year), ncol=length(dat$age)) # Tim suggested initializing at 10 rather than zero
+par$logFmort <- matrix(0, nrow=length(dat$year), ncol=1)
+par$logfshslx <- log(rep(1,15)) # need parametric selectivity
+par$logsrvslx <- log(input$srv_slx)
+par$logsrvslx <- log(rep(1,15))
+
 
 # assumes vectors at age are supplied to function for N, F, M, W, and mature
 calc_ssb <- function(Naa, Faa, M, waa, mature, spawnTimes){
   sum(Naa*exp((-Faa-M)*spawnTimes)*mature*waa)/1e3
 }
+spawnTimes
 
 # model ----
 f<-function(par){ # note dat isn't an argument in the fxn
@@ -173,7 +207,7 @@ f<-function(par){ # note dat isn't an argument in the fxn
   tmptot5 <- rowSums(tmp5)
   tmp5 <- tmp5/tmptot5
 
-  predcatchatlength <- tmp5[,rep(1,length(sizeage[1,]))]
+  #predcatchatlength <- tmp5[,rep(1,length(sizeage[1,]))]
   
   # This is a matrix version of the elementwise loop below
   #
@@ -182,31 +216,31 @@ f<-function(par){ # note dat isn't an argument in the fxn
   #   predcatchatlength2[i,]<- tmp5[i,] %*% sizeage 
   # }
   
-  for(i in seq_along(year)){
-    for(j in seq_along(len)){
-      predcatchatlength[i,j] <- sum(sizeage[,j]*tmp5[i,])
-    }
-  }
+  #for(i in seq_along(year)){
+    #for(j in seq_along(len)){
+      #predcatchatlength[i,j] <- sum(sizeage[,j]*tmp5[i,])
+    #}
+  #}
   
   tmp6 <- exp(logpredcatchatage)
   tmptot6 <- rowSums(tmp6)
   tmp6 <- tmp6/tmptot6
 
-  predcatchatlength2 <- tmp6[,rep(1,length(sizeage[1,]))]
+  #predcatchatlength2 <- tmp6[,rep(1,length(sizeage[1,]))]
   
-  for(i in seq_along(year)){
-    for(j in seq_along(len)){
-      predcatchatlength2[i,j] <- sum(sizeage[,j]*tmp6[i,])
-    }
-  }
+  #for(i in seq_along(year)){
+    #for(j in seq_along(len)){
+      #predcatchatlength2[i,j] <- sum(sizeage[,j]*tmp6[i,])
+    #}
+  #}
   
   # combine and vectorize
-  tmp7 <- rbind(predcatchatlength,predcatchatlength2)
-  out2 <- tmp7[1,]
+  #tmp7 <- rbind(predcatchatlength,predcatchatlength2)
+  #out2 <- tmp7[1,]
   
   # wow!
-  for(i in seq_along(tmp7[,1])[-1]) out2 <- c(out2, tmp7[i,])
-  predObs[which(aux$obs_type == 3)] <- out2 
+  #for(i in seq_along(tmp7[,1])[-1]) out2 <- c(out2, tmp7[i,])
+  #predObs[which(aux$obs_type == 3)] <- out2 
   
   # observational likelihoods ----
   
@@ -240,7 +274,7 @@ f<-function(par){ # note dat isn't an argument in the fxn
 fill_vals <- function(x,vals){rep(as.factor(vals), length(x))}
 map <- list()
 map$logsigR <- if(dat$logN_mode==0){fill_vals(par$logsigR, NA)}else{factor(1)}
-# map$logQ <- fill_vals(par$logQ, NA)
+map$logQ <- fill_vals(par$logQ, NA)
 map$logM <- fill_vals(par$logM, NA)
 map$logfshslx <- fill_vals(par$logfshslx, NA)
 map$logsrvslx <- fill_vals(par$logsrvslx, NA)
@@ -251,7 +285,8 @@ tmp <- matrix(data = NA, ncol = nage, nrow = nyr)
 tmp[,1] <- 1:nyr
 tmp[1,2:nage] <- (nyr+1):(nyr+nage-1)
 map$logN <- as.factor(as.vector(tmp))
-
+names(map)
+names(par)
 obj <- MakeADFun(f, par, 
                  map=map,
                  random=NULL,
