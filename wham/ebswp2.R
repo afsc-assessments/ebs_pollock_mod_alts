@@ -6,10 +6,8 @@ library(here)
 
 # create directory for analysis, E.g.,
 setwd(here())
+getwd()
 write.dir <- "wham"
-if(!exists("write.dir")) write.dir = getwd()
-if(!dir.exists(write.dir)) dir.create(write.dir)
-setwd(write.dir)
 getwd()
 # copy asap3 data file to working directory
 wham.dir <- find.package("wham")
@@ -20,9 +18,8 @@ list.files()
 getwd()
 
 # read asap3 data file and convert to input list for wham
-asap3 <- read_asap3_dat("ebswp.dat")
+#asap3 <- read_asap3_dat("ebswp.dat")
 asap3 <- read_asap3_dat("ebswp23.dat")
-?read_
 
 # ---------------------------------------------------------------
 # model 1
@@ -30,7 +27,7 @@ asap3 <- read_asap3_dat("ebswp23.dat")
 #   recruitment deviations (NAA_re): independent random effects
 #   selectivity: age-specific (fix sel=1 for ages 4-5 in fishery, age 4 in index1, and ages 2-4 in index2)
 #asap3 <- read_asap3_dat("ebswp.dat")
-asap3 <- read_asap3_dat("ebswp23.dat")
+#asap3 <- read_asap3_dat("ebswp23.dat")
 input1 <- prepare_wham_input(asap3)
 #undebug(prepare_wham_input)
 #debug(prepare_wham_input)
